@@ -10,7 +10,7 @@ int UtilsController::getUserChoice() {
 }
 
 void UtilsController::clearScreen() {
-#ifdef WINDOWS
+#ifdef WIN32
     std::system("cls");
 #else
     std::system("clear");

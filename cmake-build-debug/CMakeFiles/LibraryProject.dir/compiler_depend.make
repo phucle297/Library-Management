@@ -1594,6 +1594,7 @@ CMakeFiles/LibraryProject.dir/src/controllers/menu-controller.cpp.o: /Users/phuc
   /Users/phucle/Desktop/Library-Management/include/controllers/menu-controller.h \
   /Users/phucle/Desktop/Library-Management/include/controllers/reader-controller.h \
   /Users/phucle/Desktop/Library-Management/include/controllers/statistic-controller.h \
+  /Users/phucle/Desktop/Library-Management/include/controllers/ticket-controller.h \
   /Users/phucle/Desktop/Library-Management/include/controllers/utils-controller.h \
   /Users/phucle/Desktop/Library-Management/include/views/menu-view.h
 
@@ -9508,8 +9509,6 @@ CMakeFiles/LibraryProject.dir/src/views/ticket-view.cpp.o: /Users/phucle/Desktop
 
 /Users/phucle/Desktop/Library-Management/src/controllers/utils-controller.cpp:
 
-/Users/phucle/Desktop/Library-Management/include/controllers/ticket-controller.h:
-
 /Users/phucle/Desktop/Library-Management/src/controllers/ticket-controller.cpp:
 
 /Users/phucle/Desktop/Library-Management/include/views/statistic-view.h:
@@ -9517,6 +9516,8 @@ CMakeFiles/LibraryProject.dir/src/views/ticket-view.cpp.o: /Users/phucle/Desktop
 /Users/phucle/Desktop/Library-Management/include/views/reader-view.h:
 
 /Users/phucle/Desktop/Library-Management/include/views/menu-view.h:
+
+/Users/phucle/Desktop/Library-Management/include/controllers/ticket-controller.h:
 
 /Users/phucle/Desktop/Library-Management/include/controllers/reader-controller.h:
 
