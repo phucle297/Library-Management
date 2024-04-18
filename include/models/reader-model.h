@@ -8,7 +8,7 @@
 #include <string>
 
 class Reader {
-private:
+public:
     std::string id;
     std::string fullName;
     std::string identityCard;

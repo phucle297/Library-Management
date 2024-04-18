@@ -10,12 +10,12 @@
 #include <utility> // Để sử dụng std::pair
 
 class Ticket {
-private:
+public:
     std::string readerId;
     std::string borrowDate;
     std::string returnDateExpected;
     std::string returnDateActual;
-    std::vector<std::pair<std::string, bool>> bookList;
+    std::vector<std::pair<std::string, bool> > bookList;
 };
 
 #endif // LIBRARYPROJECT_TICKET_MODEL_H

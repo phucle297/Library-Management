@@ -10,6 +10,10 @@ public:
     static int getUserChoice();
 
     static void clearScreen();
+
+    static void stopBeforeCloseConsole();
+
+    static void shouldContinue(void (*callback)());
 };
 
 #endif //LIBRARYPROJECT_UTILS_CONTROLLER_H

@@ -29,4 +29,5 @@ add_executable(LibraryProject src/main.cpp
         src/controllers/book-controller.cpp
         include/controllers/statistic-controller.h
         src/controllers/statictis-controller.cpp
-        src/controllers/ticket-controller.cpp)
+        src/controllers/ticket-controller.cpp
+        src/models/books-model.cpp)

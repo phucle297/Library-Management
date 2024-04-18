@@ -9,15 +9,26 @@
 #include <vector>
 
 class Book {
-private:
+public:
     std::string isbn;
     std::string title;
     std::string author;
     std::string publisher;
-    std::int32_t publicationYear;
+    int publicationYear;
     std::vector<std::string> genre;
-    std::float_t price;
-    std::int32_t quantity;
+    double price;
+    int quantity;
+
+    // Constructor
+    Book(const std::string &isbn, const std::string &title, const std::string &author,
+         const std::string &publisher, int publicationYear,
+         const std::vector<std::string> &genre, double price, int quantity)
+        : isbn(isbn), title(title), author(author), publisher(publisher),
+          publicationYear(publicationYear), genre(genre), price(price), quantity(quantity) {
+    }
 };
+
+extern std::vector<Book> bookData; // Declaration of bookData
+std::vector<Book> getMockData(); // Declaration of getMockData function
 
 #endif // LIBRARYPROJECT_BOOK_MODEL_H
