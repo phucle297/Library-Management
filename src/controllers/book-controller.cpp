@@ -11,84 +11,167 @@
 #include <iostream>
 #include <sstream>
 
+using namespace std;
+
 void BookController::handleUserChoice(int choice) {
     MenuController menuController{};
     UtilsController utilsController;
     switch (choice) {
         case 1: {
-            std::vector<Book> books = getAllBooks();
-            std::cout << "All Books" << std::endl;
+            vector<Book> books = getAllBooks();
+            cout << "All Books" << endl;
             BookView::viewBooksTable(books);
             UtilsController::shouldContinue(viewMenuAndExecute);
             break;
         }
         case 2: {
-            std::string isbn, title, author, publisher;
+            string isbn, title, author, publisher;
             int publicationYear, quantity;
             double price;
-            std::vector<std::string> genre;
-            std::cout << "Creating new book..." << std::endl;
+            vector<string> genre;
+            cout << "Creating new book..." << endl;
 
-            std::cout << "Enter ISBN: ";
-            std::cin >> isbn;
-            std::cout << "Enter title: ";
-            std::cin.ignore(); // Ignore the newline character left in the input buffer
-            std::getline(std::cin, title); // using getline for non white-space
-            std::cout << "Enter author: ";
-            std::getline(std::cin, author);
-            std::cout << "Enter publisher: ";
-            std::getline(std::cin, publisher);
-            std::cout << "Enter publication year: ";
-            std::cin >> publicationYear;
-            std::cout << "Enter quantity: ";
-            std::cin >> quantity;
-            std::cout << "Enter price: ";
-            std::cin >> price;
+            cout << "Enter ISBN: ";
+            cin >> isbn;
+            cout << "Enter title: ";
+            cin.ignore(); // Ignore the newline character left in the input buffer
+            getline(cin, title); // using getline for non white-space
+            cout << "Enter author: ";
+            getline(cin, author);
+            cout << "Enter publisher: ";
+            getline(cin, publisher);
+            cout << "Enter publication year: ";
+            cin >> publicationYear;
+            cout << "Enter quantity: ";
+            cin >> quantity;
+            cout << "Enter price: ";
+            cin >> price;
 
-            std::string genreStr;
-            std::cout << "Enter genres (comma-separated): ";
-            std::cin.ignore(); // Ignore the newline character left in the input buffer
-            std::getline(std::cin, genreStr);
+            string genreStr;
+            cout << "Enter genres (comma-separated): ";
+            cin.ignore(); // Ignore the newline character left in the input buffer
+            getline(cin, genreStr);
 
-            std::istringstream iss(genreStr); // sperate genres
-            std::string genreToken;
-            while (std::getline(iss, genreToken, ',')) {
+            istringstream iss(genreStr); // sperate genres
+            string genreToken;
+            while (getline(iss, genreToken, ',')) {
                 genre.push_back(genreToken);
             }
 
             // Create a new Book object with the provided information
             Book newBook(isbn, title, author, publisher, publicationYear, genre, price, quantity);
 
-            // Add the new book to your data store (e.g., bookData)
-            bookData.push_back(newBook);
+            // Add the new book to your data store (e.g., booksData)
+            postBook(newBook);
 
             // Optionally, display a message to confirm that the book has been successfully added
-            std::cout << "Book added successfully!" << std::endl;
+            cout << "Book added successfully!" << endl;
 
             UtilsController::shouldContinue(viewMenuAndExecute);
             break;
         }
-        case 3:
-            // Xử lý chức năng quản lí phiếu mượn/trả sách
-            // Gọi các hàm ho   ặc class cần thiết ở đây
-            std::cout << "3";
-            break;
+        case 3: {
+            string updatedTitle, updatedAuthor, updatedPublisher, isbnToUpdate, updatedPublicationYear, updatedQuantity, updatedPrice;
+            vector<string> updatedGenre;
+            int publicationYearOld = 0, quantityOld = 0;
+            double priceOld = 0.0;
+            bool found = false;
+
+            while (!found) {
+                cout << "Enter the ISBN of the book you want to update: ";
+                cin >> isbnToUpdate;
+                cout << "Press Enter with empty string to keep existing data..." << endl;
+
+                for (auto &book: booksData) {
+                    if (book.isbn == isbnToUpdate) {
+                        cout << "Enter updated title: ";
+                        cin.ignore(); // Ignore the newline character left in the input buffer
+                        getline(cin, updatedTitle); // using getline for non white-space
+                        if (updatedTitle.empty()) {
+                            updatedTitle = book.title;
+                        }
+
+                        cout << "Enter updated author: ";
+                        getline(cin, updatedAuthor);
+                        if (updatedAuthor.empty()) {
+                            updatedAuthor = book.author;
+                        }
+
+                        cout << "Enter updated publisher: ";
+                        getline(cin, updatedPublisher);
+                        if (updatedPublisher.empty()) {
+                            updatedPublisher = book.publisher;
+                        }
+
+                        cout << "Enter updated publication year: ";
+                        getline(cin, updatedPublicationYear);
+                        if (updatedPublicationYear.empty()) {
+                            publicationYearOld = book.publicationYear;
+                        }
+
+                        cout << "Enter updated quantity: ";
+                        getline(cin, updatedQuantity);
+                        if (updatedQuantity.empty()) {
+                            quantityOld = book.quantity;
+                        }
+
+                        cout << "Enter updated price: ";
+                        getline(cin, updatedPrice);
+                        if (updatedPrice.empty()) {
+                            priceOld = book.price;
+                        }
+
+                        string genreStr;
+                        cout << "Enter updated genres (comma-separated): ";
+                        cin.ignore(); // Ignore the newline character left in the input buffer
+                        getline(cin, genreStr);
+                        if (!genreStr.empty()) {
+                            istringstream iss(genreStr); // sperate genres
+                            string genreToken;
+                            while (getline(iss, genreToken, ',')) {
+                                updatedGenre.push_back(genreToken);
+                            }
+                        } else {
+                            updatedGenre = book.genre;
+                        }
+
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    cout << "Book with ISBN " << isbnToUpdate << " not found. Please try again." << endl;
+                }
+            }
+            int publicationYearToUpdate = (publicationYearOld > 0) ? publicationYearOld : std::stoi(
+                    updatedPublicationYear);
+
+            int quantityToUpdate = (quantityOld > 0) ? quantityOld : stoi(updatedQuantity);
+            double priceToUpdate = (priceOld > 0) ? priceOld : stod(updatedPrice);
+
+            Book updatedBook(isbnToUpdate, updatedTitle, updatedAuthor, updatedPublisher, publicationYearToUpdate,
+                             updatedGenre, priceToUpdate, quantityToUpdate);
+
+            cout << "Book " << isbnToUpdate << " updated!" << endl;
+            updateBook(isbnToUpdate, updatedBook);
+            UtilsController::shouldContinue(viewMenuAndExecute);
+        }
         case 4:
             // Xử lý chức năng thống kê
             // Gọi các hàm hoặc class cần thiết ở đây
-            std::cout << "4";
+            cout << "4";
             break;
 
         case 5: {
-            std::string isbn;
-            std::cout << "Search by ISBN:";
-            std::cin >> isbn;
-            std::vector<Book> books = getBookByISBN(isbn);
+            string isbn;
+            cout << "Search by ISBN:";
+            cin >> isbn;
+            vector<Book> books = getBookByISBN(isbn);
             if (!books.empty()) {
-                std::cout << "Books find by ISBN" << std::endl;
+                cout << "Books find by ISBN" << endl;
                 BookView::viewBooksTable(books);
             } else {
-                std::cout << "Not found!" << std::endl;
+                cout << "Not found!" << endl;
             }
             UtilsController::shouldContinue(viewMenuAndExecute);
             break;
@@ -97,13 +180,13 @@ void BookController::handleUserChoice(int choice) {
         case 6:
             // Xử lý chức năng thống kê
             // Gọi các hàm hoặc class cần thiết ở đây
-            std::cout << "4";
+            cout << "4";
             break;
 
         case 7:
             // Xử lý chức năng thống kê
             // Gọi các hàm hoặc class cần thiết ở đây
-            std::cout << "4";
+            cout << "4";
             break;
         case 0:
             UtilsController::clearScreen();
@@ -111,7 +194,7 @@ void BookController::handleUserChoice(int choice) {
             break;
         default:
             // Xử lý lựa chọn không hợp lệ
-            std::cout << "Invalid choice! Please try again." << std::endl;
+            cout << "Invalid choice! Please try again." << endl;
             UtilsController::shouldContinue(viewMenuAndExecute);
 
             break;
@@ -126,19 +209,28 @@ void BookController::viewMenuAndExecute() {
     handleUserChoice(choice);
 }
 
-std::vector<Book> BookController::getAllBooks() {
-    return bookData;
+vector<Book> BookController::getAllBooks() {
+    return booksData;
 }
 
 void BookController::postBook(const Book &newBook) {
-    bookData.push_back(newBook);
+    booksData.push_back(newBook);
+}
+
+void BookController::updateBook(const string &isbn, const Book &updatedBook) {
+    for (auto &book: booksData) {
+        if (book.isbn == isbn) {
+            book = updatedBook;
+            break;
+        }
+    }
 }
 
 
-std::vector<Book> BookController::getBookByISBN(const std::string &isbn) {
-    std::vector<Book> foundBooks;
-    for (const auto &book: bookData) {
-        if (book.isbn.find(isbn) != std::string::npos) {
+vector<Book> BookController::getBookByISBN(const string &isbn) {
+    vector<Book> foundBooks;
+    for (const auto &book: booksData) {
+        if (book.isbn.find(isbn) != string::npos) {
             // like null in js
             foundBooks.push_back(book);
         }
@@ -146,15 +238,17 @@ std::vector<Book> BookController::getBookByISBN(const std::string &isbn) {
     return foundBooks;
 }
 
-// void BookController::deleteBook(const std::string &isbn) {
-//     bookData.erase(std::remove_if(bookData.begin(), bookData.end(), [&](const Book &book) {
+
+
+// void BookController::deleteBook(const string &isbn) {
+//     booksData.erase(remove_if(booksData.begin(), booksData.end(), [&](const Book &book) {
 //         return book.isbn == isbn;
-//     }), bookData.end());
+//     }), booksData.end());
 // }
 //
-// std::vector<Book> BookController::getBookByName(const std::string& name) {
-//     std::vector<Book> foundBooks;
-//     for (const auto& book : bookData) {
+// vector<Book> BookController::getBookByName(const string& name) {
+//     vector<Book> foundBooks;
+//     for (const auto& book : booksData) {
 //         if (book.title == name) {
 //             foundBooks.push_back(book);
 //         }
@@ -163,27 +257,18 @@ std::vector<Book> BookController::getBookByISBN(const std::string &isbn) {
 // }
 //
 
-// void BookController::updateBook(const std::string& isbn, const Book& updatedBook) {
-//     for (auto& book : bookData) {
-//         if (book.isbn == isbn) {
-//             book = updatedBook;
-//             return;
-//         }
-//     }
-// }
-//
 
-// std::vector<Book> BookController::getBooksWithSearch(const std::string& search) {
-//     std::vector<Book> foundBooks;
-//     for (const auto& book : bookData) {
+// vector<Book> BookController::getBooksWithSearch(const string& search) {
+//     vector<Book> foundBooks;
+//     for (const auto& book : booksData) {
 //         // Search in title, author, publisher, or genre
-//         if (book.title.find(search) != std::string::npos ||
-//             book.author.find(search) != std::string::npos ||
-//             book.publisher.find(search) != std::string::npos) {
+//         if (book.title.find(search) != string::npos ||
+//             book.author.find(search) != string::npos ||
+//             book.publisher.find(search) != string::npos) {
 //             foundBooks.push_back(book);
 //             } else {
 //                 for (const auto& genre : book.genre) {
-//                     if (genre.find(search) != std::string::npos) {
+//                     if (genre.find(search) != string::npos) {
 //                         foundBooks.push_back(book);
 //                         break; // Break inner loop if keyword is found in genre
 //                     }

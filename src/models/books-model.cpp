@@ -33,4 +33,4 @@ std::vector<Book> getMockData() {
     return mockData;
 }
 
-std::vector<Book> bookData = getMockData(); // Initialize bookData with mock data
+std::vector<Book> booksData = getMockData(); // Initialize bookData with mock data

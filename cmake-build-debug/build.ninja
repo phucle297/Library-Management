@@ -49,11 +49,115 @@ cmake_ninja_workdir = C$:/Users/PerMees/Desktop/LibraryProject/cmake-build-debug
 
 build cmake_object_order_depends_target_LibraryProject: phony || CMakeFiles/LibraryProject.dir
 
-build CMakeFiles/LibraryProject.dir/main.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/main.cpp || cmake_object_order_depends_target_LibraryProject
-  DEP_FILE = CMakeFiles\LibraryProject.dir\main.cpp.obj.d
+build CMakeFiles/LibraryProject.dir/src/main.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/main.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\main.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\LibraryProject.dir
-  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/views/reader-view.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/views/reader-view.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\views\reader-view.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\views
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/views/book-view.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/views/book-view.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\views\book-view.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\views
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/views/ticket-view.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/views/ticket-view.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\views\ticket-view.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\views
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/views/statistic-view.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/views/statistic-view.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\views\statistic-view.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\views
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/models/reader-model.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/models/reader-model.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\models\reader-model.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\models
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/views/menu-view.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/views/menu-view.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\views\menu-view.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\views
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/controllers/menu-controller.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/controllers/menu-controller.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\controllers\menu-controller.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\controllers
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/controllers/reader-controller.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/controllers/reader-controller.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\controllers\reader-controller.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\controllers
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/controllers/utils-controller.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/controllers/utils-controller.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\controllers\utils-controller.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\controllers
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/controllers/book-controller.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/controllers/book-controller.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\controllers\book-controller.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\controllers
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/controllers/statictis-controller.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/controllers/statictis-controller.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\controllers\statictis-controller.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\controllers
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/controllers/ticket-controller.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/controllers/ticket-controller.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\controllers\ticket-controller.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\controllers
+  TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
+  TARGET_PDB = LibraryProject.pdb
+
+build CMakeFiles/LibraryProject.dir/src/models/books-model.cpp.obj: CXX_COMPILER__LibraryProject_unscanned_Debug C$:/Users/PerMees/Desktop/LibraryProject/src/models/books-model.cpp || cmake_object_order_depends_target_LibraryProject
+  DEP_FILE = CMakeFiles\LibraryProject.dir\src\models\books-model.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LibraryProject.dir
+  OBJECT_FILE_DIR = CMakeFiles\LibraryProject.dir\src\models
   TARGET_COMPILE_PDB = CMakeFiles\LibraryProject.dir\
   TARGET_PDB = LibraryProject.pdb
 
@@ -65,7 +169,7 @@ build CMakeFiles/LibraryProject.dir/main.cpp.obj: CXX_COMPILER__LibraryProject_u
 #############################################
 # Link the executable LibraryProject.exe
 
-build LibraryProject.exe: CXX_EXECUTABLE_LINKER__LibraryProject_Debug CMakeFiles/LibraryProject.dir/main.cpp.obj
+build LibraryProject.exe: CXX_EXECUTABLE_LINKER__LibraryProject_Debug CMakeFiles/LibraryProject.dir/src/main.cpp.obj CMakeFiles/LibraryProject.dir/src/views/reader-view.cpp.obj CMakeFiles/LibraryProject.dir/src/views/book-view.cpp.obj CMakeFiles/LibraryProject.dir/src/views/ticket-view.cpp.obj CMakeFiles/LibraryProject.dir/src/views/statistic-view.cpp.obj CMakeFiles/LibraryProject.dir/src/models/reader-model.cpp.obj CMakeFiles/LibraryProject.dir/src/views/menu-view.cpp.obj CMakeFiles/LibraryProject.dir/src/controllers/menu-controller.cpp.obj CMakeFiles/LibraryProject.dir/src/controllers/reader-controller.cpp.obj CMakeFiles/LibraryProject.dir/src/controllers/utils-controller.cpp.obj CMakeFiles/LibraryProject.dir/src/controllers/book-controller.cpp.obj CMakeFiles/LibraryProject.dir/src/controllers/statictis-controller.cpp.obj CMakeFiles/LibraryProject.dir/src/controllers/ticket-controller.cpp.obj CMakeFiles/LibraryProject.dir/src/models/books-model.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\LibraryProject.dir

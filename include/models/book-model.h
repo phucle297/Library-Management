@@ -28,7 +28,7 @@ public:
     }
 };
 
-extern std::vector<Book> bookData; // Declaration of bookData
+extern std::vector<Book> booksData; // Declaration of bookData
 std::vector<Book> getMockData(); // Declaration of getMockData function
 
 #endif // LIBRARYPROJECT_BOOK_MODEL_H
