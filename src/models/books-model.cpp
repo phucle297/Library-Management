@@ -8,12 +8,11 @@ using namespace std;
 
 vector<Book> getMockData() {
     vector<Book> mockData;
-    mockData.reserve(10); // Reserve space for 10 elements to avoid reallocation
+    mockData.reserve(8); // Reserve space for 10 elements to avoid reallocation
 
     // Add each Book object individually
     mockData.emplace_back("9780451524935", "1984", "George Orwell", "Signet Classic", 1949,
                           vector<string>{"Dystopian", "Political fiction"}, 9.99, 100);
-
     mockData.emplace_back("9780061120084", "To Kill a Mockingbird", "Harper Lee", "Harper Perennial Modern Classics",
                           1960, vector<string>{"Novel", "Southern Gothic"}, 8.99, 75);
     mockData.emplace_back("9780141187761", "The Catcher in the Rye", "J.D. Salinger", "Penguin Books", 1951,
@@ -29,8 +28,7 @@ vector<Book> getMockData() {
     mockData.emplace_back("9780345339683", "The Hobbit", "J.R.R. Tolkien", "Del Rey Books", 1937,
                           vector<string>{"Fantasy"}, 14.50,
                           80);
-    mockData.emplace_back("9780446310789", "To Kill a Mockingbird", "Harper Lee", "Grand Central Publishing", 1960,
-                          vector<string>{"Novel", "Southern Gothic"}, 9.25, 65);
+
 
     return mockData;
 }
