@@ -6,6 +6,7 @@
 #define LIBRARYPROJECT_READER_MODEL_H
 
 #include <string>
+#include "vector"
 
 using namespace std;
 
@@ -23,25 +24,24 @@ public:
 
     // Constructor
     Reader(
-            const string &id,
-            const string &fullName,
-            const string &identityNumber,
-            const string &dateOfBirth,
-            const string &gender,
-            const string &email,
-            const string &address,
-            const string &issueDate,
-            const string &expiryDate
-    ) :
-            id(id),
-            fullName(fullName),
-            identityNumber(identityNumber),
-            dateOfBirth(dateOfBirth),
-            gender(gender),
-            email(email),
-            address(address),
-            issueDate(issueDate),
-            expiryDate(expiryDate) {
+        const string &id,
+        const string &fullName,
+        const string &identityNumber,
+        const string &dateOfBirth,
+        const string &gender,
+        const string &email,
+        const string &address,
+        const string &issueDate,
+        const string &expiryDate
+    ) : id(id),
+        fullName(fullName),
+        identityNumber(identityNumber),
+        dateOfBirth(dateOfBirth),
+        gender(gender),
+        email(email),
+        address(address),
+        issueDate(issueDate),
+        expiryDate(expiryDate) {
     }
 };
 

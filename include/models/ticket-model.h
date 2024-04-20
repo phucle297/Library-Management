@@ -7,9 +7,17 @@
 
 #include <string>
 #include <vector>
-#include <utility> // for using pair
 
 using namespace std;
+
+class BookStatus {
+public:
+    string isbn;
+    bool lost;
+
+    BookStatus(const string &isbn, const bool lost) : isbn(isbn), lost(lost) {
+    }
+};
 
 class Ticket {
 public:
@@ -17,20 +25,19 @@ public:
     string borrowDate;
     string returnDateExpected;
     string returnDateActual;
-    vector<pair<string, bool>> bookList;
+    vector<BookStatus> listBookStatus;
 
     Ticket(
-            const string &readerId,
-            const string &borrowDate,
-            const string &returnDateExpected,
-            const string &returnDateActual,
-            const vector<pair<string, bool>> &bookList
-    ) :
-            readerId(readerId),
-            borrowDate(borrowDate),
-            returnDateExpected(returnDateExpected),
-            returnDateActual(returnDateActual),
-            bookList(bookList) {
+        const string &readerId,
+        const string &borrowDate,
+        const string &returnDateExpected,
+        const string &returnDateActual,
+        const vector<BookStatus> &listBookStatus
+    ) : readerId(readerId),
+        borrowDate(borrowDate),
+        returnDateExpected(returnDateExpected),
+        returnDateActual(returnDateActual),
+        listBookStatus(listBookStatus) {
     }
 };
 
