@@ -7,15 +7,12 @@
 #include "../../include/controllers/utils-controller.h"
 #include "../../include/controllers/menu-controller.h"
 #include "../../include/views/book-view.h"
-#include "../../include/models/book-model.h"
 #include <iostream>
 #include <sstream>
 
 using namespace std;
 
 void BookController::handleUserChoice(int choice) {
-    MenuController menuController{};
-    UtilsController utilsController;
     switch (choice) {
         case 1: {
             vector<Book> books = getAllBooks();
@@ -204,20 +201,27 @@ void BookController::handleUserChoice(int choice) {
             break;
         }
 
-        case 7:
-            // Xử lý chức năng thống kê
-            // Gọi các hàm hoặc class cần thiết ở đây
-            cout << "4";
+        case 7: {
+            string search;
+            cout << "Enter value to search: 2";
+            cin >> search;
+            vector<Book> books = getBooksWithSearch(search);
+            if (!books.empty()) {
+                cout << "Books find by name" << endl;
+                BookView::viewBooksTable(books);
+            } else {
+                cout << "Not found!" << endl;
+            }
+            UtilsController::shouldContinue(viewMenuAndExecute);
             break;
+        }
         case 0:
             UtilsController::clearScreen();
             MenuController::viewMenuAndExecute();
             break;
         default:
-            // Xử lý lựa chọn không hợp lệ
             cout << "Invalid choice! Please try again." << endl;
             UtilsController::shouldContinue(viewMenuAndExecute);
-
             break;
     }
 }
@@ -272,31 +276,42 @@ vector<Book> BookController::getBookByName(const string &name) {
     return foundBooks;
 }
 
+vector<Book> BookController::getBooksWithSearch(const string &search) {
+    vector<Book> foundBooks;
+    for (const auto &book: booksData) {
+        // Search in title, author, publisher, or genre
+        string titleTransformed = book.title;
+        transform(titleTransformed.begin(), titleTransformed.end(), titleTransformed.begin(),
+                  [](unsigned char c) { return tolower(c); });
+
+        string authorTransformed = book.author;
+        transform(authorTransformed.begin(), authorTransformed.end(), authorTransformed.begin(),
+                  [](unsigned char c) { return tolower(c); });
+
+        string publisherTransformed = book.publisher;
+        transform(authorTransformed.begin(), authorTransformed.end(), authorTransformed.begin(),
+                  [](unsigned char c) { return tolower(c); });
+
+        if (titleTransformed.find(search) != string::npos ||
+            authorTransformed.find(search) != string::npos ||
+            publisherTransformed.find(search) != string::npos ||
+            to_string(book.publicationYear).find(search) != string::npos) {
+            foundBooks.push_back(book);
+        } else {
+            for (const auto &genre: book.genre) {
+                if (genre.find(search) != string::npos) {
+                    foundBooks.push_back(book);
+                    break; // Break inner loop if keyword is found in genre
+                }
+            }
+        }
+    }
+    return foundBooks;
+}
+
 void BookController::deleteBook(const string &isbn) {
     booksData.erase(remove_if(booksData.begin(), booksData.end(), [&](const Book &book) {
         return book.isbn == isbn;
     }), booksData.end());
 }
 
-
-
-
-// vector<Book> BookController::getBooksWithSearch(const string& search) {
-//     vector<Book> foundBooks;
-//     for (const auto& book : booksData) {
-//         // Search in title, author, publisher, or genre
-//         if (book.title.find(search) != string::npos ||
-//             book.author.find(search) != string::npos ||
-//             book.publisher.find(search) != string::npos) {
-//             foundBooks.push_back(book);
-//             } else {
-//                 for (const auto& genre : book.genre) {
-//                     if (genre.find(search) != string::npos) {
-//                         foundBooks.push_back(book);
-//                         break; // Break inner loop if keyword is found in genre
-//                     }
-//                 }
-//             }
-//     }
-//     return foundBooks;
-// }
