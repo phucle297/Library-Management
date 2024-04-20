@@ -140,7 +140,7 @@ void BookController::handleUserChoice(int choice) {
                     cout << "Book with ISBN " << isbnToUpdate << " not found. Please try again." << endl;
                 }
             }
-            int publicationYearToUpdate = (publicationYearOld > 0) ? publicationYearOld : std::stoi(
+            int publicationYearToUpdate = (publicationYearOld > 0) ? publicationYearOld : stoi(
                     updatedPublicationYear);
 
             int quantityToUpdate = (quantityOld > 0) ? quantityOld : stoi(updatedQuantity);

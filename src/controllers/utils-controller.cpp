@@ -2,33 +2,35 @@
 #include "iostream"
 #include <cstdlib>
 
+using namespace std;
+
 int UtilsController::getUserChoice() {
     int choice;
-    std::cout << "Enter your choice: ";
-    std::cin >> choice;
+    cout << "Enter your choice: ";
+    cin >> choice;
     return choice;
 }
 
 void UtilsController::clearScreen() {
 #ifdef WIN32
-    std::system("cls");
+    system("cls");
 #else
-    std::system("clear");
+    system("clear");
 #endif
 }
 
 void UtilsController::stopBeforeCloseConsole() {
 #ifdef WIN32
-    std::system("pause");
+    system("pause");
 #else
-    std::system("read");
+    system("read");
 #endif
 }
 
 void UtilsController::shouldContinue(void (*callback)()) {
-    std::cout << "Do you want to continue? (Y/N)" << std::endl;
+    cout << "Do you want to continue? (Y/N)" << endl;
     char flag;
-    std::cin >> flag;
+    cin >> flag;
 
     if (flag == 'y' || flag == 'Y') {
         callback();

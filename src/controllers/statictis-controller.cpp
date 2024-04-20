@@ -9,25 +9,27 @@
 
 #include <iostream>
 
+using namespace std;
+
 void StatisticController::handleUserChoice(int choice) {
     MenuController menuController{};
 
     switch (choice) {
         case 1:
-            std::cout << "1";
+            cout << "1";
             break;
         case 2:
-            std::cout << "2";
+            cout << "2";
             break;
         case 3:
             // Xử lý chức năng quản lí phiếu mượn/trả sách
             // Gọi các hàm hoặc class cần thiết ở đây
-            std::cout << "3";
+            cout << "3";
             break;
         case 4:
             // Xử lý chức năng thống kê
             // Gọi các hàm hoặc class cần thiết ở đây
-            std::cout << "4";
+            cout << "4";
             break;
         case 0:
             UtilsController::clearScreen();
@@ -35,7 +37,7 @@ void StatisticController::handleUserChoice(int choice) {
             break;
         default:
             // Xử lý lựa chọn không hợp lệ
-            std::cout << "Invalid choice! Please try again." << std::endl;
+            cout << "Invalid choice! Please try again." << endl;
             break;
     }
 }

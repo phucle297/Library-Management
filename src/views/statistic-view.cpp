@@ -6,14 +6,16 @@
 #include "../../include/controllers/utils-controller.h"
 #include "iostream"
 
+using namespace std;
+
 void StatisticView::displayStatisticMenu() {
     UtilsController::clearScreen();
-    std::cout << "Manage Statistic Menu:" << std::endl;
-    std::cout << "1. View list of Books" << std::endl;
-    std::cout << "2. View list of Books by genre" << std::endl;
-    std::cout << "3. View list of Readers" << std::endl;
-    std::cout << "4. View list of Readers by gender" << std::endl;
-    std::cout << "5. View list of Books which borrowed" << std::endl;
-    std::cout << "6. View list of overdue Readers." << std::endl;
-    std::cout << "0. Return to main menu" << std::endl;
+    cout << "Manage Statistic Menu:" << endl;
+    cout << "1. View list of Books" << endl;
+    cout << "2. View list of Books by genre" << endl;
+    cout << "3. View list of Readers" << endl;
+    cout << "4. View list of Readers by gender" << endl;
+    cout << "5. View list of Books which borrowed" << endl;
+    cout << "6. View list of overdue Readers." << endl;
+    cout << "0. Return to main menu" << endl;
 }

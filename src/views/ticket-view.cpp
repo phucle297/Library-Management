@@ -6,9 +6,11 @@
 #include "../../include/controllers/utils-controller.h"
 #include "iostream"
 
+using namespace std;
+
 void TicketView::displayTicketMenu() {
     UtilsController::clearScreen();
-    std::cout << "Manage Ticket Menu:" << std::endl;
-    std::cout << "1. Create borrowing ticket" << std::endl;
-    std::cout << "2. Create returning ticket" << std::endl;
+    cout << "Manage Ticket Menu:" << endl;
+    cout << "1. Create borrowing ticket" << endl;
+    cout << "2. Create returning ticket" << endl;
 }

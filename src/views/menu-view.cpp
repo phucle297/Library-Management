@@ -2,13 +2,15 @@
 #include "../../include/controllers/utils-controller.h"
 #include <iostream>
 
+using namespace std;
+
 void MenuView::displayMenu() {
     UtilsController::clearScreen();
-    std::cout << "Welcome to Library" << std::endl;
-    std::cout << "Please select the function you want to use:" << std::endl;
-    std::cout << "1. Manage Readers" << std::endl;
-    std::cout << "2. Manage Books" << std::endl;
-    std::cout << "3. Manage Tickets (Borrows/Return)" << std::endl;
-    std::cout << "4. Statistic" << std::endl;
-    std::cout << "0. End the program" << std::endl;
+    cout << "Welcome to Library" << endl;
+    cout << "Please select the function you want to use:" << endl;
+    cout << "1. Manage Readers" << endl;
+    cout << "2. Manage Books" << endl;
+    cout << "3. Manage Tickets (Borrows/Return)" << endl;
+    cout << "4. Statistic" << endl;
+    cout << "0. End the program" << endl;
 }

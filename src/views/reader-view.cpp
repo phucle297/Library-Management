@@ -6,16 +6,18 @@
 #include "../../include/controllers/utils-controller.h"
 #include <iostream>
 
+using namespace std;
+
 void ReaderView::displayReaderMenu() {
     UtilsController::clearScreen();
 
-    std::cout << "Manage Readers Menu:" << std::endl;
-    std::cout << "1. View list of readers" << std::endl;
-    std::cout << "2. Add reader" << std::endl;
-    std::cout << "3. Edit reader information" << std::endl;
-    std::cout << "4. Delete reader" << std::endl;
-    std::cout << "5. Search by citizen identification id" << std::endl;
-    std::cout << "6. Search by name" << std::endl;
-    std::cout << "7. General search" << std::endl;
-    std::cout << "0. Return to main menu" << std::endl;
+    cout << "Manage Readers Menu:" << endl;
+    cout << "1. View list of readers" << endl;
+    cout << "2. Add reader" << endl;
+    cout << "3. Edit reader information" << endl;
+    cout << "4. Delete reader" << endl;
+    cout << "5. Search by citizen identification id" << endl;
+    cout << "6. Search by name" << endl;
+    cout << "7. General search" << endl;
+    cout << "0. Return to main menu" << endl;
 }

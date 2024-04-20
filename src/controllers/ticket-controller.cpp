@@ -8,19 +8,21 @@
 #include "../../include/views/ticket-view.h"
 #include <iostream>
 
+using namespace std;
+
 void TicketController::handleUserChoice(int choice) {
     MenuController menuController{};
 
     switch (choice) {
         case 1:
-            std::cout << "1";
+            cout << "1";
             break;
         case 2:
-            std::cout << "2";
+            cout << "2";
             break;
         default:
             // Xử lý lựa chọn không hợp lệ
-            std::cout << "Invalid choice! Please try again." << std::endl;
+            cout << "Invalid choice! Please try again." << endl;
             break;
     }
 }

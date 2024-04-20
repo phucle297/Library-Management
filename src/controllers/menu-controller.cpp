@@ -10,10 +10,9 @@
 #include "../../include/controllers/ticket-controller.h"
 #include "../../include/views/menu-view.h"
 
+using namespace std;
+
 void MenuController::handleUserChoice(int choice) {
-    ReaderController readerController{};
-    BookController bookController{};
-    StatisticController statisticController{};
     switch (choice) {
         case 1:
             ReaderController::viewMenuAndExecute();
@@ -28,11 +27,9 @@ void MenuController::handleUserChoice(int choice) {
             StatisticController::viewMenuAndExecute();
             break;
         case 0:
-            // Kết thúc chương trình
             return;
         default:
-            // Xử lý lựa chọn không hợp lệ
-            std::cout << "Invalid choice! Please try again." << std::endl;
+            cout << "Invalid choice! Please try again." << endl;
             break;
     }
 }
