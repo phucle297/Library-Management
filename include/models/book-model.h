@@ -22,15 +22,28 @@ public:
     int quantity;
 
     // Constructor
-    Book(const string &isbn, const string &title, const string &author,
-         const string &publisher, int publicationYear,
-         const vector<string> &genre, double price, int quantity)
-            : isbn(isbn), title(title), author(author), publisher(publisher),
-              publicationYear(publicationYear), genre(genre), price(price), quantity(quantity) {
+    Book(
+            const string &isbn,
+            const string &title,
+            const string &author,
+            const string &publisher,
+            const int publicationYear,
+            const vector<string> &genre,
+            const double price,
+            const int quantity
+    ) :
+            isbn(isbn),
+            title(title),
+            author(author),
+            publisher(publisher),
+            publicationYear(publicationYear),
+            genre(genre),
+            price(price),
+            quantity(quantity) {
     }
 };
 
 extern vector<Book> booksData; // Declaration of bookData
-vector<Book> getMockData(); // Declaration of getMockData function
+vector<Book> getBooksMockData(); // Declaration of getMockData function
 
 #endif // LIBRARYPROJECT_BOOK_MODEL_H

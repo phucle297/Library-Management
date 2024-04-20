@@ -2,9 +2,9 @@
 // Created by phucle on 18/04/2024.
 //
 
+#include "iostream"
 #include "../../include/views/statistic-view.h"
 #include "../../include/controllers/utils-controller.h"
-#include "iostream"
 
 using namespace std;
 

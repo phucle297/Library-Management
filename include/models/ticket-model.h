@@ -18,6 +18,24 @@ public:
     string returnDateExpected;
     string returnDateActual;
     vector<pair<string, bool>> bookList;
+
+    Ticket(
+            string &readerId,
+            string &borrowDate,
+            string &returnDateExpected,
+            string &returnDateActual,
+            vector<pair<string, bool>> &bookList
+    ) :
+            readerId(readerId),
+            borrowDate(borrowDate),
+            returnDateExpected(returnDateExpected),
+            returnDateActual(returnDateActual),
+            bookList(bookList) {
+    }
 };
+
+extern vector<Ticket> ticketsData;
+
+vector<Ticket> getTicketsMockData();
 
 #endif // LIBRARYPROJECT_TICKET_MODEL_H

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-vector<Book> getMockData() {
+vector<Book> getBooksMockData() {
     vector<Book> mockData;
     mockData.reserve(8); // Reserve space for 10 elements to avoid reallocation
 
@@ -33,4 +33,4 @@ vector<Book> getMockData() {
     return mockData;
 }
 
-vector<Book> booksData = getMockData(); // Initialize bookData with mock data
+vector<Book> booksData = getBooksMockData(); // Initialize bookData with mock data

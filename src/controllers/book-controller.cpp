@@ -157,16 +157,7 @@ void BookController::handleUserChoice(int choice) {
             string isbnToDelete;
             cout << "Enter the ISBN of the book you want to delete: ";
             cin >> isbnToDelete;
-            bool flag = false;
-            for (auto &book: booksData) {
-                if (book.isbn == isbnToDelete) {
-                    flag = true;
-                    deleteBook(isbnToDelete);
-                    cout << "Book " << isbnToDelete << " deleted!" << endl;
-                }
-            }
-            if (!flag) cout << "ISBN not exists, please try again" << endl;
-
+            deleteBook(isbnToDelete);
             UtilsController::shouldContinue(viewMenuAndExecute);
 
             break;
@@ -315,9 +306,19 @@ vector<Book> BookController::getBooksWithSearch(const string &search) {
     return foundBooks;
 }
 
-void BookController::deleteBook(const string &isbn) {
-    booksData.erase(remove_if(booksData.begin(), booksData.end(), [&](const Book &book) {
-        return book.isbn == isbn;
-    }), booksData.end());
-}
+void BookController::deleteBook(const string &isbnToDelete) {
+    bool found = false;
 
+    for (auto it = booksData.begin(); it != booksData.end(); ++it) {
+        if (it->isbn == isbnToDelete) {
+            found = true;
+            booksData.erase(it);
+            cout << "Book " << isbnToDelete << " deleted!" << endl;
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << "Book with ISBN " << isbnToDelete << " not found. Please try again." << endl;
+    }
+}
