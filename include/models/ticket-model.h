@@ -20,11 +20,11 @@ public:
     vector<pair<string, bool>> bookList;
 
     Ticket(
-            string &readerId,
-            string &borrowDate,
-            string &returnDateExpected,
-            string &returnDateActual,
-            vector<pair<string, bool>> &bookList
+            const string &readerId,
+            const string &borrowDate,
+            const string &returnDateExpected,
+            const string &returnDateActual,
+            const vector<pair<string, bool>> &bookList
     ) :
             readerId(readerId),
             borrowDate(borrowDate),

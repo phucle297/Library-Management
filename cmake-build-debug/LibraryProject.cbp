@@ -139,10 +139,13 @@
 		<Unit filename="/Users/phucle/Desktop/Library-Management/src/main.cpp">
 			<Option target="LibraryProject"/>
 		</Unit>
-		<Unit filename="/Users/phucle/Desktop/Library-Management/src/models/books-model.cpp">
+		<Unit filename="/Users/phucle/Desktop/Library-Management/src/models/book-model.cpp">
 			<Option target="LibraryProject"/>
 		</Unit>
 		<Unit filename="/Users/phucle/Desktop/Library-Management/src/models/reader-model.cpp">
+			<Option target="LibraryProject"/>
+		</Unit>
+		<Unit filename="/Users/phucle/Desktop/Library-Management/src/models/ticket-model.cpp">
 			<Option target="LibraryProject"/>
 		</Unit>
 		<Unit filename="/Users/phucle/Desktop/Library-Management/src/views/book-view.cpp">

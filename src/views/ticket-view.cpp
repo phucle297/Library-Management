@@ -11,6 +11,6 @@ using namespace std;
 void TicketView::displayTicketMenu() {
     UtilsController::clearScreen();
     cout << "Manage Ticket Menu:" << endl;
-    cout << "1. Create borrowing ticket" << endl;
-    cout << "2. Create returning ticket" << endl;
+    cout << "1. Create borrow ticket" << endl;
+    cout << "2. Return books" << endl;
 }

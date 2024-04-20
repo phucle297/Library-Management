@@ -297,29 +297,29 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/models/books-model.o: src/models/books-model.cpp.o
-.PHONY : src/models/books-model.o
+src/models/book-model.o: src/models/book-model.cpp.o
+.PHONY : src/models/book-model.o
 
 # target to build an object file
-src/models/books-model.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/models/books-model.cpp.o
-.PHONY : src/models/books-model.cpp.o
+src/models/book-model.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/models/book-model.cpp.o
+.PHONY : src/models/book-model.cpp.o
 
-src/models/books-model.i: src/models/books-model.cpp.i
-.PHONY : src/models/books-model.i
+src/models/book-model.i: src/models/book-model.cpp.i
+.PHONY : src/models/book-model.i
 
 # target to preprocess a source file
-src/models/books-model.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/models/books-model.cpp.i
-.PHONY : src/models/books-model.cpp.i
+src/models/book-model.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/models/book-model.cpp.i
+.PHONY : src/models/book-model.cpp.i
 
-src/models/books-model.s: src/models/books-model.cpp.s
-.PHONY : src/models/books-model.s
+src/models/book-model.s: src/models/book-model.cpp.s
+.PHONY : src/models/book-model.s
 
 # target to generate assembly for a file
-src/models/books-model.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/models/books-model.cpp.s
-.PHONY : src/models/books-model.cpp.s
+src/models/book-model.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/models/book-model.cpp.s
+.PHONY : src/models/book-model.cpp.s
 
 src/models/reader-model.o: src/models/reader-model.cpp.o
 .PHONY : src/models/reader-model.o
@@ -344,6 +344,30 @@ src/models/reader-model.s: src/models/reader-model.cpp.s
 src/models/reader-model.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/models/reader-model.cpp.s
 .PHONY : src/models/reader-model.cpp.s
+
+src/models/ticket-model.o: src/models/ticket-model.cpp.o
+.PHONY : src/models/ticket-model.o
+
+# target to build an object file
+src/models/ticket-model.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/models/ticket-model.cpp.o
+.PHONY : src/models/ticket-model.cpp.o
+
+src/models/ticket-model.i: src/models/ticket-model.cpp.i
+.PHONY : src/models/ticket-model.i
+
+# target to preprocess a source file
+src/models/ticket-model.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/models/ticket-model.cpp.i
+.PHONY : src/models/ticket-model.cpp.i
+
+src/models/ticket-model.s: src/models/ticket-model.cpp.s
+.PHONY : src/models/ticket-model.s
+
+# target to generate assembly for a file
+src/models/ticket-model.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LibraryProject.dir/build.make CMakeFiles/LibraryProject.dir/src/models/ticket-model.cpp.s
+.PHONY : src/models/ticket-model.cpp.s
 
 src/views/book-view.o: src/views/book-view.cpp.o
 .PHONY : src/views/book-view.o
@@ -495,12 +519,15 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/models/books-model.o"
-	@echo "... src/models/books-model.i"
-	@echo "... src/models/books-model.s"
+	@echo "... src/models/book-model.o"
+	@echo "... src/models/book-model.i"
+	@echo "... src/models/book-model.s"
 	@echo "... src/models/reader-model.o"
 	@echo "... src/models/reader-model.i"
 	@echo "... src/models/reader-model.s"
+	@echo "... src/models/ticket-model.o"
+	@echo "... src/models/ticket-model.i"
+	@echo "... src/models/ticket-model.s"
 	@echo "... src/views/book-view.o"
 	@echo "... src/views/book-view.i"
 	@echo "... src/views/book-view.s"

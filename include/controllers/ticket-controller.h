@@ -10,6 +10,10 @@ public:
     static void handleUserChoice(int choice);
 
     static void viewMenuAndExecute();
+
+    static void createBorrowTicket();
+
+    static void returnBooks();
 };
 
 #endif //LIBRARYPROJECT_TICKET_CONTROLLER_H
