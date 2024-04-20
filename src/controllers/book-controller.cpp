@@ -156,12 +156,24 @@ void BookController::handleUserChoice(int choice) {
             updateBook(isbnToUpdate, updatedBook);
             UtilsController::shouldContinue(viewMenuAndExecute);
         }
-        case 4:
-            // Xử lý chức năng thống kê
-            // Gọi các hàm hoặc class cần thiết ở đây
-            cout << "4";
-            break;
+        case 4: {
+            string isbnToDelete;
+            cout << "Enter the ISBN of the book you want to delete: ";
+            cin >> isbnToDelete;
+            bool flag = false;
+            for (auto &book: booksData) {
+                if (book.isbn == isbnToDelete) {
+                    flag = true;
+                    deleteBook(isbnToDelete);
+                    cout << "Book " << isbnToDelete << " deleted!" << endl;
+                }
+            }
+            if (!flag) cout << "ISBN not exists, please try again" << endl;
 
+            UtilsController::shouldContinue(viewMenuAndExecute);
+
+            break;
+        }
         case 5: {
             string isbn;
             cout << "Search by ISBN:";
@@ -177,11 +189,20 @@ void BookController::handleUserChoice(int choice) {
             break;
         }
 
-        case 6:
-            // Xử lý chức năng thống kê
-            // Gọi các hàm hoặc class cần thiết ở đây
-            cout << "4";
+        case 6: {
+            string name;
+            cout << "Search by Name:";
+            cin >> name;
+            vector<Book> books = getBookByName(name);
+            if (!books.empty()) {
+                cout << "Books find by name" << endl;
+                BookView::viewBooksTable(books);
+            } else {
+                cout << "Not found!" << endl;
+            }
+            UtilsController::shouldContinue(viewMenuAndExecute);
             break;
+        }
 
         case 7:
             // Xử lý chức năng thống kê
@@ -238,24 +259,26 @@ vector<Book> BookController::getBookByISBN(const string &isbn) {
     return foundBooks;
 }
 
+vector<Book> BookController::getBookByName(const string &name) {
+    vector<Book> foundBooks;
+    for (const auto &book: booksData) {
+        string titleTransformed = book.title;
+        transform(titleTransformed.begin(), titleTransformed.end(), titleTransformed.begin(),
+                  [](unsigned char c) { return tolower(c); });
+        if (titleTransformed.find(name) != string::npos) {
+            foundBooks.push_back(book);
+        }
+    }
+    return foundBooks;
+}
+
+void BookController::deleteBook(const string &isbn) {
+    booksData.erase(remove_if(booksData.begin(), booksData.end(), [&](const Book &book) {
+        return book.isbn == isbn;
+    }), booksData.end());
+}
 
 
-// void BookController::deleteBook(const string &isbn) {
-//     booksData.erase(remove_if(booksData.begin(), booksData.end(), [&](const Book &book) {
-//         return book.isbn == isbn;
-//     }), booksData.end());
-// }
-//
-// vector<Book> BookController::getBookByName(const string& name) {
-//     vector<Book> foundBooks;
-//     for (const auto& book : booksData) {
-//         if (book.title == name) {
-//             foundBooks.push_back(book);
-//         }
-//     }
-//     return foundBooks;
-// }
-//
 
 
 // vector<Book> BookController::getBooksWithSearch(const string& search) {
