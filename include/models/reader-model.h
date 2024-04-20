@@ -7,17 +7,19 @@
 
 #include <string>
 
+using namespace std;
+
 class Reader {
 public:
-    std::string id;
-    std::string fullName;
-    std::string identityCard;
-    std::string dateOfBirth;
-    std::string gender;
-    std::string email;
-    std::string address;
-    std::string issueDate;
-    std::string expiryDate;
+    string id;
+    string fullName;
+    string identityCard;
+    string dateOfBirth;
+    string gender;
+    string email;
+    string address;
+    string issueDate;
+    string expiryDate;
 };
 
 #endif // LIBRARYPROJECT_READER_MODEL_H

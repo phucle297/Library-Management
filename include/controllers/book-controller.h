@@ -4,7 +4,10 @@
 
 #ifndef LIBRARYPROJECT_BOOK_CONTROLLER_H
 #define LIBRARYPROJECT_BOOK_CONTROLLER_H
+
 #include "../models/book-model.h"
+
+using namespace std;
 
 class BookController {
 public:
@@ -12,19 +15,19 @@ public:
 
     static void viewMenuAndExecute();
 
-    static std::vector<Book> getAllBooks();
+    static vector<Book> getAllBooks();
 
-    static std::vector<Book> getBookByISBN(const std::string &isbn);
+    static vector<Book> getBookByISBN(const string &isbn);
 
-    static std::vector<Book> getBookByName(const std::string &name);
+    static vector<Book> getBookByName(const string &name);
 
     static void postBook(const Book &newBook);
 
-    static void updateBook(const std::string &isbn, const Book &updatedBook);
+    static void updateBook(const string &isbn, const Book &updatedBook);
 
-    static void deleteBook(const std::string &isbn);
+    static void deleteBook(const string &isbn);
 
-    static std::vector<Book> getBooksWithSearch(const std::string &search);
+    static vector<Book> getBooksWithSearch(const string &search);
 };
 
 #endif //LIBRARYPROJECT_BOOK_CONTROLLER_H
