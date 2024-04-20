@@ -175,6 +175,8 @@ void BookController::handleUserChoice(int choice) {
             string isbn;
             cout << "Search by ISBN:";
             cin >> isbn;
+            transform(isbn.begin(), isbn.end(), isbn.begin(), [](unsigned char c) { return tolower(c); });
+
             vector<Book> books = getBookByISBN(isbn);
             if (!books.empty()) {
                 cout << "Books find by ISBN" << endl;
@@ -190,7 +192,9 @@ void BookController::handleUserChoice(int choice) {
             string name;
             cout << "Search by Name:";
             cin >> name;
+            transform(name.begin(), name.end(), name.begin(), [](unsigned char c) { return tolower(c); });
             vector<Book> books = getBookByName(name);
+
             if (!books.empty()) {
                 cout << "Books find by name" << endl;
                 BookView::viewBooksTable(books);
@@ -203,8 +207,10 @@ void BookController::handleUserChoice(int choice) {
 
         case 7: {
             string search;
-            cout << "Enter value to search: 2";
+            cout << "Enter value to search: ";
             cin >> search;
+            transform(search.begin(), search.end(), search.begin(), [](unsigned char c) { return tolower(c); });
+
             vector<Book> books = getBooksWithSearch(search);
             if (!books.empty()) {
                 cout << "Books find by name" << endl;
