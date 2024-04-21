@@ -7,6 +7,7 @@
 #include "../../include/views/reader-view.h"
 #include "../../include/controllers/reader-controller.h"
 #include "../../include/controllers/utils-controller.h"
+#include "../../include/controllers/menu-controller.h"
 
 using namespace std;
 
@@ -176,7 +177,7 @@ void ReaderController::handleUserChoice(int choice) {
         case 6: {
             string nameToSearch;
             cout << "Enter the name of the reader you want to search for: ";
-            cin.ignore(); // Ignore the newline character left in the input buffer
+            cin.ignore();
             getline(cin, nameToSearch);
             transform(nameToSearch.begin(), nameToSearch.end(), nameToSearch.begin(), ::tolower);
             vector<Reader> foundReaders = getReaderByName(nameToSearch);
@@ -190,6 +191,34 @@ void ReaderController::handleUserChoice(int choice) {
             UtilsController::shouldContinue(viewMenuAndExecute);
             break;
         };
+        case 7 : {
+            string searchValue;
+            cout << "Enter search value: ";
+            cin.ignore();
+            getline(cin, searchValue);
+            transform(searchValue.begin(), searchValue.end(), searchValue.begin(), ::tolower);
+
+            vector<Reader> foundReaders = getReadersWithSearch(searchValue);
+
+            if (!foundReaders.empty()) {
+                cout << "User found!" << endl;
+                ReaderView::viewReadersTable(foundReaders);
+            } else {
+                cout << "Not found." << endl;
+            }
+            UtilsController::shouldContinue(viewMenuAndExecute);
+            break;
+        }
+        case 0: {
+            UtilsController::clearScreen();
+            MenuController::viewMenuAndExecute();
+            break;
+        }
+        default: {
+            cout << "Invalid choice! Please try again." << endl;
+            UtilsController::shouldContinue(viewMenuAndExecute);
+            break;
+        }
     }
 }
 

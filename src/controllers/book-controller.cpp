@@ -212,14 +212,17 @@ void BookController::handleUserChoice(int choice) {
             UtilsController::shouldContinue(viewMenuAndExecute);
             break;
         }
-        case 0:
+        case 0: {
             UtilsController::clearScreen();
             MenuController::viewMenuAndExecute();
             break;
-        default:
+        }
+        default: {
+
             cout << "Invalid choice! Please try again." << endl;
             UtilsController::shouldContinue(viewMenuAndExecute);
             break;
+        }
     }
 }
 
