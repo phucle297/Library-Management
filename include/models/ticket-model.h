@@ -21,6 +21,7 @@ public:
 
 class Ticket {
 public:
+    string id;
     string readerId;
     string borrowDate;
     string returnDateExpected;
@@ -28,12 +29,14 @@ public:
     vector<BookStatus> listBookStatus;
 
     Ticket(
-        const string &readerId,
-        const string &borrowDate,
-        const string &returnDateExpected,
-        const string &returnDateActual,
-        const vector<BookStatus> &listBookStatus
-    ) : readerId(readerId),
+            const string &id,
+            const string &readerId,
+            const string &borrowDate,
+            const string &returnDateExpected,
+            const string &returnDateActual,
+            const vector<BookStatus> &listBookStatus
+    ) : id(id),
+        readerId(readerId),
         borrowDate(borrowDate),
         returnDateExpected(returnDateExpected),
         returnDateActual(returnDateActual),
