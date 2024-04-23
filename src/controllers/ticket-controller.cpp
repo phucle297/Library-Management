@@ -76,7 +76,6 @@ void TicketController::handleUserChoice(int choice) {
 
             if (!returnedTicket.id.empty()) {
                 cout << "Books returned successfully!" << endl;
-                // Optionally, you can display the details of the returned ticket
                 TicketView::viewTicketsTable({returnedTicket});
             } else {
                 cout << "Ticket with ID " << ticketId << " not found. Please try again." << endl;
@@ -119,6 +118,60 @@ void TicketController::handleUserChoice(int choice) {
             break;
         };
         case 6: {
+            string id, readerId, borrowDate, returnDateExpected, returnDateActual;
+            int numberOfBorrowBooks;
+            vector<BookStatus> listBooks;
+            cout << "Edit borrow ticket..." << endl;
+
+            cout << "Enter ticket ID: ";
+            cin >> id;
+
+            bool flag = false;
+            for (auto &ticket: ticketsData) {
+                if (ticket.id == id) {
+                    flag = true;
+                    cout << "Current data of ticket  " << id << endl;
+                    TicketView::viewTicketsTable(ticket);
+                }
+            }
+
+            if (!flag) {
+                cout << "Ticket with ID " << id << " not found. Please try again." << endl;
+                UtilsController::shouldContinue(viewMenuAndExecute);
+            } else {
+                cout << "Enter updated reader id: ";
+                cin.ignore();
+                getline(cin, readerId);
+
+                cout << "Enter updated borrow date: ";
+                getline(cin, borrowDate);
+
+                cout << "Enter updated return date expected: ";
+                getline(cin, returnDateExpected);
+
+                cout << "Enter updated return date actual: ";
+                getline(cin, returnDateActual);
+
+                cout << "Enter updated number of borrow book: ";
+                cin >> numberOfBorrowBooks;
+                listBooks.reserve(numberOfBorrowBooks);
+                for (int i = 0; i < numberOfBorrowBooks; i++) {
+                    string isbn;
+                    bool lost;
+                    cout << "Book " << i + 1 << ":" << endl;
+                    cout << "ISBN: ";
+                    cin >> isbn;
+                    cout << "Is lost (1: Yes, 0: No): ";
+                    cin >> lost;
+                    listBooks.emplace_back(isbn, lost);
+                };
+                Ticket updatedTIcket(id, readerId, borrowDate, returnDateExpected, returnDateActual, listBooks);
+                updateTicketById(id, updatedTIcket);
+
+                cout << "Ticket " << id << " updated!" << endl;
+                UtilsController::shouldContinue(viewMenuAndExecute);
+            }
+
             break;
         }
         case 7: {
@@ -201,18 +254,13 @@ void TicketController::createBorrowTicket(Ticket &ticketToCreate) {
     ticketsData.push_back(ticketToCreate);
 };
 
-// Update the returnBooks function to accept actual return date and list of lost books
 Ticket TicketController::returnBooks(string &ticketId, string &returnDateActual,
                                      vector<string> &lostBooks) {
-    // Search for the ticket with the specified ID
     for (auto &ticket: ticketsData) {
         if (ticket.id == ticketId) {
-            // Update return date actual
             ticket.returnDateActual = returnDateActual;
 
-            // Update book statuses to indicate lost books
             for (auto &bookStatus: ticket.listBookStatus) {
-                // Check if the book ISBN is in the list of lost books
                 if (find(lostBooks.begin(), lostBooks.end(), bookStatus.isbn) != lostBooks.end()) {
                     bookStatus.lost = true;
                 } else {
@@ -220,13 +268,20 @@ Ticket TicketController::returnBooks(string &ticketId, string &returnDateActual,
                 }
             }
 
-            // Optionally, perform any other necessary updates
-
-            // Return the updated ticket
             return ticket;
         }
     }
 
-    // Return an empty ticket if the specified ticket ID is not found
+    return Ticket("", "", "", "", "", {});
+}
+
+Ticket TicketController::updateTicketById(string &ticketId, Ticket &updatedTicket) {
+    for (auto &ticket: ticketsData) {
+        if (ticket.id == ticketId) {
+            ticket = updatedTicket;
+            return ticket;
+        }
+    }
+
     return Ticket("", "", "", "", "", {});
 }
