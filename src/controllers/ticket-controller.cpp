@@ -164,8 +164,8 @@ void TicketController::handleUserChoice(int choice) {
                     cin >> lost;
                     listBooks.emplace_back(isbn, lost);
                 };
-                Ticket updatedTIcket(id, readerId, borrowDate, returnDateExpected, returnDateActual, listBooks);
-                updateTicketById(id, updatedTIcket);
+                Ticket updatedTicket(id, readerId, borrowDate, returnDateExpected, returnDateActual, listBooks);
+                updateTicketById(id, updatedTicket);
 
                 cout << "Ticket " << id << " updated!" << endl;
                 UtilsController::shouldContinue(viewMenuAndExecute);
