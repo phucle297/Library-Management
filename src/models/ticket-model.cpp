@@ -19,7 +19,8 @@ vector<Ticket> getTicketsMockData() {
 
     mockData.emplace_back("001", "1001", "2024-04-20", "2024-05-20", "", vector<BookStatus>{book1, book2});
     mockData.emplace_back("002", "1002", "2024-04-21", "2024-05-21", "", vector<BookStatus>{book3, book4});
-    mockData.emplace_back("003", "1003", "2024-04-22", "2024-05-22", "", vector<BookStatus>{book5, book6});
+    mockData.emplace_back("003", "1003", "2024-03-22", "2024-04-22", "", vector<BookStatus>{book5, book6});
+    mockData.emplace_back("004", "1004", "2024-02-22", "2024-03-22", "2024-04-21", vector<BookStatus>{book5, book6});
 
     return mockData;
 }
