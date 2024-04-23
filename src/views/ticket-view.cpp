@@ -23,7 +23,6 @@ void TicketView::displayTicketMenu() {
 }
 
 void TicketView::viewTicketsTable(vector<Ticket> &tickets) {
-    // Print table header
     cout << left << setw(15) << "ID";
     cout << left << setw(15) << "Reader ID";
     cout << left << setw(15) << "Borrow Date";
@@ -32,7 +31,6 @@ void TicketView::viewTicketsTable(vector<Ticket> &tickets) {
     cout << left << setw(15) << "ISBN";
     cout << left << setw(10) << "Lost" << endl;
 
-    // Print each ticket as a row in the table
     for (const auto &ticket: tickets) {
         for (const auto &bookStatus: ticket.listBookStatus) {
             cout << left << setw(15) << ticket.id;

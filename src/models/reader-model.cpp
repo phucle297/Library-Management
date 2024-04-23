@@ -18,7 +18,6 @@ vector<Reader> getReadersMockData() {
                           "jane.smith@example.com", "456 Elm Street", "2024-04-20", "2024-12-31");
     mockData.emplace_back("1003", "Michael Johnson", "456789123", "1985-10-20", "Male",
                           "michael.johnson@example.com", "789 Oak Street", "2024-04-20", "2024-12-31");
-    // Add more readers to reach a total of 10
     mockData.emplace_back("1004", "Emily Brown", "789123456", "1988-03-12", "Female",
                           "emily.brown@example.com", "456 Pine Street", "2024-04-20", "2024-12-31");
     mockData.emplace_back("1005", "Michael Smith", "654321789", "1975-07-05", "Male",

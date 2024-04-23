@@ -35,7 +35,6 @@ void ReaderView::viewReadersTable(const vector<Reader> &readers) {
     cout << left << setw(15) << "Issue Date";
     cout << left << setw(15) << "Expiry Date" << endl;
 
-    // Print each reader as a row in the table
     for (const auto &reader: readers) {
         cout << left << setw(15) << reader.id;
         cout << left << setw(30) << reader.fullName;

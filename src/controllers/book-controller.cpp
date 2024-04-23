@@ -31,8 +31,8 @@ void BookController::handleUserChoice(int choice) {
             cout << "Enter ISBN: ";
             cin >> isbn;
             cout << "Enter title: ";
-            cin.ignore(); // Ignore the newline character left in the input buffer
-            getline(cin, title); // using getline for non white-space
+            cin.ignore();
+            getline(cin, title);
             cout << "Enter author: ";
             getline(cin, author);
             cout << "Enter publisher: ";
@@ -46,22 +46,19 @@ void BookController::handleUserChoice(int choice) {
 
             string genreStr;
             cout << "Enter genres (comma-separated): ";
-            cin.ignore(); // Ignore the newline character left in the input buffer
+            cin.ignore();
             getline(cin, genreStr);
 
-            istringstream iss(genreStr); // sperate genres
+            istringstream iss(genreStr);
             string genreToken;
             while (getline(iss, genreToken, ',')) {
                 genre.push_back(genreToken);
             }
 
-            // Create a new Book object with the provided information
             Book newBook(isbn, title, author, publisher, publicationYear, genre, price, quantity);
 
-            // Add the new book to your data store (e.g., booksData)
             postBook(newBook);
 
-            // Optionally, display a message to confirm that the book has been successfully added
             cout << "Book added successfully!" << endl;
 
             UtilsController::shouldContinue(viewMenuAndExecute);
@@ -82,8 +79,8 @@ void BookController::handleUserChoice(int choice) {
                 for (auto &book: booksData) {
                     if (book.isbn == isbnToUpdate) {
                         cout << "Enter updated title: ";
-                        cin.ignore(); // Ignore the newline character left in the input buffer
-                        getline(cin, updatedTitle); // using getline for non white-space
+                        cin.ignore();
+                        getline(cin, updatedTitle);
                         if (updatedTitle.empty()) {
                             updatedTitle = book.title;
                         }
@@ -120,10 +117,10 @@ void BookController::handleUserChoice(int choice) {
 
                         string genreStr;
                         cout << "Enter updated genres (comma-separated): ";
-                        cin.ignore(); // Ignore the newline character left in the input buffer
+                        cin.ignore();
                         getline(cin, genreStr);
                         if (!genreStr.empty()) {
-                            istringstream iss(genreStr); // sperate genres
+                            istringstream iss(genreStr);
                             string genreToken;
                             while (getline(iss, genreToken, ',')) {
                                 updatedGenre.push_back(genreToken);
@@ -256,7 +253,6 @@ vector<Book> BookController::getBookByISBN(const string &isbn) {
     vector<Book> foundBooks;
     for (const auto &book: booksData) {
         if (book.isbn.find(isbn) != string::npos) {
-            // like null in js
             foundBooks.push_back(book);
         }
     }
@@ -279,7 +275,6 @@ vector<Book> BookController::getBookByName(const string &name) {
 vector<Book> BookController::getBooksWithSearch(const string &search) {
     vector<Book> foundBooks;
     for (const auto &book: booksData) {
-        // Search in title, author, publisher, or genre
         string titleTransformed = book.title;
         transform(titleTransformed.begin(), titleTransformed.end(), titleTransformed.begin(),
                   [](unsigned char c) { return tolower(c); });
@@ -301,7 +296,7 @@ vector<Book> BookController::getBooksWithSearch(const string &search) {
             for (const auto &genre: book.genre) {
                 if (genre.find(search) != string::npos) {
                     foundBooks.push_back(book);
-                    break; // Break inner loop if keyword is found in genre
+                    break;
                 }
             }
         }

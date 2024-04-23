@@ -51,7 +51,6 @@ void TicketController::handleUserChoice(int choice) {
             break;
         }
         case 2: {
-            // Case 2: Return books
             string ticketId;
             cout << "Enter the ID of the ticket to return books: ";
             cin >> ticketId;

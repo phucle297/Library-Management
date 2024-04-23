@@ -23,7 +23,6 @@ void BookView::displayBookMenu() {
 }
 
 void BookView::viewBooksTable(const vector<Book> &books) {
-    // Print table header
     cout << left << setw(15) << "ISBN";
     cout << left << setw(25) << "Title";
     cout << left << setw(25) << "Author";
@@ -33,7 +32,6 @@ void BookView::viewBooksTable(const vector<Book> &books) {
     cout << left << setw(10) << "Price";
     cout << left << setw(10) << "Quantity" << endl;
 
-    // Print each book as a row in the table
     for (const auto &book: books) {
         cout << left << setw(15) << book.isbn;
         cout << left << setw(25) << book.title;
@@ -41,12 +39,11 @@ void BookView::viewBooksTable(const vector<Book> &books) {
         cout << left << setw(35) << book.publisher;
         cout << left << setw(10) << book.publicationYear;
 
-        // Format genre as a comma-separated string
         string genreStr;
         for (const auto &genre: book.genre) {
             genreStr += genre + ", ";
         }
-        genreStr = genreStr.substr(0, genreStr.size() - 2); // Remove the trailing comma and space
+        genreStr = genreStr.substr(0, genreStr.size() - 2);
         cout << left << setw(35) << genreStr;
         cout << left << setw(10) << book.price;
         cout << left << setw(10) << book.quantity << endl;

@@ -27,19 +27,18 @@ void ReaderController::handleUserChoice(int choice) {
             cout << "Enter ID: ";
             cin >> id;
             cout << "Enter full name: ";
-            cin.ignore(); // Ignore the newline character left in the input buffer
-            getline(cin, fullName); // using getline for non white-space
+            cin.ignore();
+            getline(cin, fullName);
             cout << "Enter identity card: ";
             getline(cin, identityNumber);
             cout << "Enter date of birth (YYYY-MM-DD): ";
             getline(cin, dateOfBirth);
             cout << "Enter gender: ";
             getline(cin, gender);
-            // transform gender to Pascal case
             if (!gender.empty()) {
-                gender[0] = toupper(gender[0]); // Capitalize the first letter
+                gender[0] = toupper(gender[0]);
                 for (size_t i = 1; i < gender.size(); ++i) {
-                    gender[i] = tolower(gender[i]); // Convert remaining letters to lowercase
+                    gender[i] = tolower(gender[i]);
                 }
             }
             cout << "Enter email: ";
@@ -51,13 +50,10 @@ void ReaderController::handleUserChoice(int choice) {
             cout << "Enter expiry date (YYYY-MM-DD): ";
             getline(cin, expiryDate);
 
-            // Create a new Reader object with the provided information
             Reader newReader{id, fullName, identityNumber, dateOfBirth, gender, email, address, issueDate, expiryDate};
 
-            // Add the new reader to your data store (e.g., readersData)
             postReader(newReader);
 
-            // Optionally, display a message to confirm that the reader has been successfully added
             cout << "Reader added successfully!" << endl;
 
             UtilsController::shouldContinue(viewMenuAndExecute);
@@ -70,14 +66,13 @@ void ReaderController::handleUserChoice(int choice) {
             cout << "Enter the ID of the reader you want to update: ";
             cin >> idToUpdate;
 
-            // Search for the reader with the specified ID
             for (auto &reader: readersData) {
                 if (reader.id == idToUpdate) {
                     found = true;
 
                     cout << "Enter updated full name: ";
-                    cin.ignore(); // Ignore the newline character left in the input buffer
-                    getline(cin, updatedFullName); // using getline for non white-space
+                    cin.ignore();
+                    getline(cin, updatedFullName);
                     if (updatedFullName.empty()) {
                         updatedFullName = reader.fullName;
                     }
@@ -97,9 +92,9 @@ void ReaderController::handleUserChoice(int choice) {
                     cout << "Enter updated gender: ";
                     getline(cin, updatedGender);
                     if (!updatedGender.empty()) {
-                        updatedGender[0] = toupper(updatedGender[0]); // Capitalize the first letter
+                        updatedGender[0] = toupper(updatedGender[0]);
                         for (size_t i = 1; i < updatedGender.size(); ++i) {
-                            updatedGender[i] = tolower(updatedGender[i]); // Convert remaining letters to lowercase
+                            updatedGender[i] = tolower(updatedGender[i]);
                         }
                     } else {
                         updatedGender = reader.gender;
@@ -129,15 +124,12 @@ void ReaderController::handleUserChoice(int choice) {
                         updatedExpiryDate = reader.expiryDate;
                     }
 
-                    // Create a new Reader object with the updated information
                     Reader updatedReader{idToUpdate, updatedFullName, updatedIdentityCard, updatedDateOfBirth,
                                          updatedGender, updatedEmail, updatedAddress, updatedIssueDate,
                                          updatedExpiryDate};
 
-                    // Update the reader in your data store (e.g., readersData)
                     updateReader(idToUpdate, updatedReader);
 
-                    // Display a message to confirm that the reader has been successfully updated
                     cout << "Reader " << idToUpdate << " updated!" << endl;
 
                     break;
@@ -238,7 +230,6 @@ vector<Reader> ReaderController::getReaderByIdentityNumber(const string &identit
     vector<Reader> foundReader;
     for (const auto &reader: readersData) {
         if (reader.identityNumber.find(identityNumberToSearch) != string::npos) {
-            // Display the details of the found reader using the existing function
             foundReader.push_back(reader);
         }
     }
@@ -273,11 +264,9 @@ void ReaderController::updateReader(const string &id, const Reader &updatedReade
 void ReaderController::deleteReader(const string &idToDelete) {
     bool found = false;
 
-    // Search for the reader with the specified ID
     for (auto it = readersData.begin(); it != readersData.end(); ++it) {
         if (it->id == idToDelete) {
             found = true;
-            // Erase the reader from the data store
             readersData.erase(it);
             cout << "Reader " << idToDelete << " deleted!" << endl;
             break;
