@@ -6,8 +6,6 @@
 #include "set"
 #include "algorithm"
 #include "unordered_map"
-#include "iomanip"
-#include "chrono"
 #include "../../include/controllers/statistic-controller.h"
 #include "../../include/controllers/utils-controller.h"
 #include "../../include/controllers/menu-controller.h"
@@ -43,6 +41,11 @@ void StatisticController::handleUserChoice(int choice) {
         }
         case 5: {
             listBooksWereBorrowed();
+            UtilsController::shouldContinue(viewMenuAndExecute);
+            break;
+        }
+        case 6: {
+            listOverdueReaders();
             UtilsController::shouldContinue(viewMenuAndExecute);
             break;
         }
@@ -163,4 +166,44 @@ void StatisticController::listBooksWereBorrowed() {
 
 
     BookView::viewBooksTable(booksBorrowed);
+}
+
+
+void StatisticController::listOverdueReaders() {
+    vector<Reader> overdueReaders;
+
+    auto currentTime = chrono::system_clock::now();
+
+    for (const auto &ticket: ticketsData) {
+        // Check returnDateActual>returnDateExpected || returnDateActual===null && Date.now()>returnDateExpected
+        if (!ticket.returnDateActual.empty()) {
+            auto returnDateActualTime = chrono::system_clock::from_time_t(stoi(ticket.returnDateActual));
+            auto returnDateExpectedTime = chrono::system_clock::from_time_t(stoi(ticket.returnDateExpected));
+            if (returnDateActualTime > returnDateExpectedTime) {
+                for (const auto &reader: readersData) {
+                    if (reader.id == ticket.readerId) {
+                        overdueReaders.push_back(reader);
+                        break;
+                    }
+                }
+            }
+        } else {
+            auto returnDateExpectedTime = chrono::system_clock::from_time_t(stoi(ticket.returnDateExpected));
+            if (returnDateExpectedTime < currentTime) {
+                for (const auto &reader: readersData) {
+                    if (reader.id == ticket.readerId) {
+                        overdueReaders.push_back(reader);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    if (!overdueReaders.empty()) {
+        cout << "Overdue Readers:" << endl;
+        ReaderView::viewReadersTable(overdueReaders);
+    } else {
+        cout << "No overdue readers found." << endl;
+    }
 }
