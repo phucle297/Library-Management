@@ -26,7 +26,7 @@ public:
 
     static void createBorrowTicket(Ticket &ticketToCreate);
 
-    static Ticket returnBooks(string &ticketId, Ticket &ticketReturn);
+    static Ticket returnBooks(string &ticketId, string &returnDateActual, vector<string> &lostBooks);
 };
 
 #endif //LIBRARYPROJECT_TICKET_CONTROLLER_H

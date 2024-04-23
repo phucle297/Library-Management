@@ -3,10 +3,12 @@
 //
 
 #include <iostream>
+#include "algorithm"
 #include "../../include/controllers/ticket-controller.h"
 #include "../../include/controllers/menu-controller.h"
 #include "../../include/controllers/utils-controller.h"
 #include "../../include/views/ticket-view.h"
+
 using namespace std;
 
 void TicketController::handleUserChoice(int choice) {
@@ -48,9 +50,41 @@ void TicketController::handleUserChoice(int choice) {
 
             break;
         }
-        case 2:
-            cout << "2";
+        case 2: {
+            // Case 2: Return books
+            string ticketId;
+            cout << "Enter the ID of the ticket to return books: ";
+            cin >> ticketId;
+
+            string returnDateActual;
+            cout << "Enter actual return date (YYYY-MM-DD): ";
+            cin >> returnDateActual;
+
+            int numberOfLostBooks;
+            cout << "Enter the number of lost books: ";
+            cin >> numberOfLostBooks;
+
+            vector<string> lostBooks;
+            for (int i = 0; i < numberOfLostBooks; ++i) {
+                string isbn;
+                cout << "Enter ISBN of lost book " << i + 1 << ": ";
+                cin >> isbn;
+                lostBooks.push_back(isbn);
+            }
+
+            Ticket returnedTicket = returnBooks(ticketId, returnDateActual, lostBooks);
+
+            if (!returnedTicket.id.empty()) {
+                cout << "Books returned successfully!" << endl;
+                // Optionally, you can display the details of the returned ticket
+                TicketView::viewTicketsTable({returnedTicket});
+            } else {
+                cout << "Ticket with ID " << ticketId << " not found. Please try again." << endl;
+            }
+
+            UtilsController::shouldContinue(viewMenuAndExecute);
             break;
+        }
 
         case 3: {
             vector<Ticket> tickets = getAllTickets();
@@ -166,3 +200,33 @@ void TicketController::deleteTicket(string &ticketId) {
 void TicketController::createBorrowTicket(Ticket &ticketToCreate) {
     ticketsData.push_back(ticketToCreate);
 };
+
+// Update the returnBooks function to accept actual return date and list of lost books
+Ticket TicketController::returnBooks(string &ticketId, string &returnDateActual,
+                                     vector<string> &lostBooks) {
+    // Search for the ticket with the specified ID
+    for (auto &ticket: ticketsData) {
+        if (ticket.id == ticketId) {
+            // Update return date actual
+            ticket.returnDateActual = returnDateActual;
+
+            // Update book statuses to indicate lost books
+            for (auto &bookStatus: ticket.listBookStatus) {
+                // Check if the book ISBN is in the list of lost books
+                if (find(lostBooks.begin(), lostBooks.end(), bookStatus.isbn) != lostBooks.end()) {
+                    bookStatus.lost = true;
+                } else {
+                    bookStatus.lost = false;
+                }
+            }
+
+            // Optionally, perform any other necessary updates
+
+            // Return the updated ticket
+            return ticket;
+        }
+    }
+
+    // Return an empty ticket if the specified ticket ID is not found
+    return Ticket("", "", "", "", "", {});
+}
