@@ -12,6 +12,7 @@
 #include "../../include/views/book-view.h"
 #include "../../include/views/reader-view.h"
 #include "../../include/views/statistic-view.h"
+#include "../../include/views/ticket-view.h"
 
 using namespace std;
 
@@ -45,10 +46,31 @@ void StatisticController::handleUserChoice(int choice) {
             break;
         }
         case 6: {
-            listOverdueReaders();
+            vector<Reader> overdueReaders = listOverdueReaders();
+            if (!overdueReaders.empty()) {
+                cout << "Overdue Readers:" << endl;
+                ReaderView::viewReadersTable(overdueReaders);
+            } else {
+                cout << "No overdue readers found." << endl;
+            }
             UtilsController::shouldContinue(viewMenuAndExecute);
             break;
         }
+        case 7: {
+            vector<Ticket> overdueTickets = listOverdueTickets();
+            if (!overdueTickets.empty()) {
+                cout << "Overdue Tickets:" << endl;
+                TicketView::viewTicketsTable(overdueTickets);
+            } else {
+                cout << "No overdue tickets found." << endl;
+            }
+            UtilsController::shouldContinue(viewMenuAndExecute);
+            break;
+        }
+        case 8: {
+            UtilsController::shouldContinue(viewMenuAndExecute);
+            break;
+        };
         case 0:
             UtilsController::clearScreen();
             MenuController::viewMenuAndExecute();
@@ -73,7 +95,6 @@ void StatisticController::listAllBooks() {
 
     BookView::viewBooksTable(booksData);
 }
-
 
 void StatisticController::listBooksByGenre() {
     set<string> genresSet;
@@ -168,42 +189,35 @@ void StatisticController::listBooksWereBorrowed() {
     BookView::viewBooksTable(booksBorrowed);
 }
 
+vector<Ticket> StatisticController::listOverdueTickets() {
+    string currentDate = UtilsController::getCurrentDate();
+    vector<Ticket> overdueTickets;
+    for (const Ticket &ticket: ticketsData) {
+        bool isOverdueNotReturn =
+                !ticket.returnDateActual.empty() && ticket.returnDateActual > ticket.returnDateExpected;
+        bool isOverdueReturnLate = ticket.returnDateActual.empty() && currentDate > ticket.returnDateExpected;
 
-void StatisticController::listOverdueReaders() {
-    vector<Reader> overdueReaders;
-
-    auto currentTime = chrono::system_clock::now();
-
-    for (const auto &ticket: ticketsData) {
-        // Check returnDateActual>returnDateExpected || returnDateActual===null && Date.now()>returnDateExpected
-        if (!ticket.returnDateActual.empty()) {
-            auto returnDateActualTime = chrono::system_clock::from_time_t(stoi(ticket.returnDateActual));
-            auto returnDateExpectedTime = chrono::system_clock::from_time_t(stoi(ticket.returnDateExpected));
-            if (returnDateActualTime > returnDateExpectedTime) {
-                for (const auto &reader: readersData) {
-                    if (reader.id == ticket.readerId) {
-                        overdueReaders.push_back(reader);
-                        break;
-                    }
-                }
-            }
-        } else {
-            auto returnDateExpectedTime = chrono::system_clock::from_time_t(stoi(ticket.returnDateExpected));
-            if (returnDateExpectedTime < currentTime) {
-                for (const auto &reader: readersData) {
-                    if (reader.id == ticket.readerId) {
-                        overdueReaders.push_back(reader);
-                        break;
-                    }
-                }
-            }
+        if (isOverdueNotReturn || isOverdueReturnLate) {
+            overdueTickets.push_back(ticket);
         }
     }
 
-    if (!overdueReaders.empty()) {
-        cout << "Overdue Readers:" << endl;
-        ReaderView::viewReadersTable(overdueReaders);
-    } else {
-        cout << "No overdue readers found." << endl;
+    return overdueTickets;
+}
+
+vector<Reader> StatisticController::listOverdueReaders() {
+    vector<Ticket> overdueTickets = listOverdueTickets();
+    vector<Reader> overdueReaders;
+    set<string> readerIds;
+    for (const Ticket &ticket: overdueTickets) {
+        readerIds.insert(ticket.readerId);
     }
+
+    for (const Reader &reader: readersData) {
+        if (readerIds.find(reader.id) != readerIds.end()) {
+            overdueReaders.push_back(reader);
+        }
+    }
+
+    return overdueReaders;
 }

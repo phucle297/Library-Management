@@ -1,5 +1,7 @@
-#include "../../include/controllers/utils-controller.h"
 #include "iostream"
+#include "chrono"
+#include "cstdio"
+#include "../../include/controllers/utils-controller.h"
 
 using namespace std;
 
@@ -34,4 +36,16 @@ void UtilsController::shouldContinue(void (*callback)()) {
     if (flag == 'y' || flag == 'Y') {
         callback();
     }
+}
+
+string UtilsController::getCurrentDate() {
+    time_t rawtime;
+    tm *timeinfo;
+    char buffer[10];
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    strftime(buffer, 80, "%Y-%m-%d", timeinfo);
+    return buffer;
 }

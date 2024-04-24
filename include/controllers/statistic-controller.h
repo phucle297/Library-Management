@@ -28,13 +28,15 @@ public:
 
     static void listBooksWereBorrowed();
 
-    static void listOverdueReaders();
+    static vector<Reader> listOverdueReaders();
 
-    static int calcFeeAmount(Ticket &ticket);
+    static vector<Ticket> listOverdueTickets();
 
-    static int calcOverdueFee(Ticket &ticket);
+    static int calcFeeAmount(const Ticket &ticket);
 
-    static int calcLostBookPenalty(string &isbn);
+    static int calcOverdueFee(const Ticket &ticket);
+
+    static int calcLostBookPenalty(const string &isbn);
 };
 
 #endif //LIBRARYPROJECT_STATISTIC_CONTROLLER_H
