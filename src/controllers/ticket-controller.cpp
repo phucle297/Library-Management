@@ -3,11 +3,13 @@
 //
 
 #include <iostream>
+#include <set>
 #include "algorithm"
 #include "../../include/controllers/ticket-controller.h"
 #include "../../include/controllers/menu-controller.h"
 #include "../../include/controllers/utils-controller.h"
 #include "../../include/views/ticket-view.h"
+#include "../../include/views/book-view.h"
 
 using namespace std;
 
@@ -35,15 +37,24 @@ void TicketController::handleUserChoice(int choice) {
             cout << "Enter number of borrow book: ";
             cin >> numberOfBorrowBooks;
             listBooks.reserve(numberOfBorrowBooks);
+
+            set<string> bookIds;
+
             for (int i = 0; i < numberOfBorrowBooks; i++) {
                 string isbn;
                 cout << "Book " << i + 1 << ":" << endl;
                 cout << "ISBN: ";
                 cin >> isbn;
                 listBooks.emplace_back(isbn, true);
+                bookIds.insert(isbn);
             };
             Ticket newBorrowTicket(id, readerId, borrowDate, returnDateExpected, "", listBooks);
             createBorrowTicket(newBorrowTicket);
+            for (Book &book: booksData) {
+                if (bookIds.find(book.isbn) != bookIds.end()) {
+                    book.quantity--;
+                }
+            }
 
             cout << "Borrow ticket created!" << endl;
             UtilsController::shouldContinue(viewMenuAndExecute);
@@ -69,6 +80,22 @@ void TicketController::handleUserChoice(int choice) {
                 cout << "Enter ISBN of lost book " << i + 1 << ": ";
                 cin >> isbn;
                 lostBooks.push_back(isbn);
+            }
+            set<string> remainingBooks;
+            for (const Ticket &ticket: ticketsData) {
+                if (ticketId == ticket.id) {
+                    for (const BookStatus &bs: ticket.listBookStatus) {
+                        if (find(lostBooks.begin(), lostBooks.end(), bs.isbn) == lostBooks.end()) {
+                            remainingBooks.insert(bs.isbn);
+                        }
+                    }
+                }
+            }
+
+            for (Book &book: booksData) {
+                if (remainingBooks.find(book.isbn) != remainingBooks.end()) {
+                    book.quantity++;
+                }
             }
 
             Ticket returnedTicket = returnBooks(ticketId, returnDateActual, lostBooks);
