@@ -68,6 +68,32 @@ void StatisticController::handleUserChoice(int choice) {
             break;
         }
         case 8: {
+            vector<Ticket> overdueTickets = listOverdueTickets();
+            if (!overdueTickets.empty()) {
+                cout << "Overdue Tickets:" << endl;
+                TicketView::viewTicketsTable(overdueTickets);
+                string ticketId;
+                cout << "Enter the ticket id you want to calculate fee amount: ";
+                cin >> ticketId;
+                bool flag = false;
+                for (Ticket &ticket: ticketsData) {
+                    if (ticket.id == ticketId) {
+                        flag = true;
+                        cout << "Total fee amount: " << UtilsController::toLocaleString(calcFeeAmount(ticket)) << " ("
+                             << "Overdue: " << UtilsController::toLocaleString(calcOverdueFee(ticket)) << ", "
+                             << "Lost book penalty: "
+                             << UtilsController::toLocaleString(calcFeeAmount(ticket) - calcOverdueFee(ticket)) << ")"
+                             << endl;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    cout << "Ticket id not found." << endl;
+                }
+            } else {
+                cout << "No overdue tickets found." << endl;
+            }
+
             UtilsController::shouldContinue(viewMenuAndExecute);
             break;
         };
@@ -193,9 +219,9 @@ vector<Ticket> StatisticController::listOverdueTickets() {
     string currentDate = UtilsController::getCurrentDate();
     vector<Ticket> overdueTickets;
     for (const Ticket &ticket: ticketsData) {
-        bool isOverdueNotReturn =
+        bool isOverdueReturnLate =
                 !ticket.returnDateActual.empty() && ticket.returnDateActual > ticket.returnDateExpected;
-        bool isOverdueReturnLate = ticket.returnDateActual.empty() && currentDate > ticket.returnDateExpected;
+        bool isOverdueNotReturn = ticket.returnDateActual.empty() && currentDate > ticket.returnDateExpected;
 
         if (isOverdueNotReturn || isOverdueReturnLate) {
             overdueTickets.push_back(ticket);
@@ -220,4 +246,46 @@ vector<Reader> StatisticController::listOverdueReaders() {
     }
 
     return overdueReaders;
+}
+
+double StatisticController::calcLostBookPenalty(const std::string &isbn) {
+    for (const Book &book: booksData) {
+        if (book.isbn == isbn) return book.price * 200;
+    }
+    return 0;
+}
+
+double StatisticController::calcOverdueFee(const Ticket &ticket) {
+    string currentDate = UtilsController::getCurrentDate();
+    bool isOverdueNotReturn = ticket.returnDateActual.empty() && currentDate > ticket.returnDateExpected;
+    int dateDifference = isOverdueNotReturn ? UtilsController::calcDateDifference(ticket.returnDateExpected, currentDate
+    )
+                                            : UtilsController::calcDateDifference(ticket.returnDateExpected,
+                                                                                  ticket.returnDateActual);
+    int overdueFee = dateDifference * 5000;
+    return overdueFee;
+}
+
+double StatisticController::calcFeeAmount(const Ticket &ticket) {
+    double overdueFee = calcOverdueFee(ticket);
+    bool isOverdueReturnLate =
+            !ticket.returnDateActual.empty() && ticket.returnDateActual > ticket.returnDateExpected;
+
+    if (!isOverdueReturnLate) {
+        return overdueFee;
+    }
+
+    double lostBooksFee = 0;
+
+    for (const BookStatus &bs: ticket.listBookStatus) {
+        if (bs.lost) {
+            for (Book &book: booksData) {
+                if (book.isbn == bs.isbn) {
+                    lostBooksFee += book.price * 2;
+                }
+            }
+        }
+    }
+
+    return lostBooksFee + overdueFee;
 }

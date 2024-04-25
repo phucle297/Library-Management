@@ -32,11 +32,11 @@ public:
 
     static vector<Ticket> listOverdueTickets();
 
-    static int calcFeeAmount(const Ticket &ticket);
+    static double calcFeeAmount(const Ticket &ticket);
 
-    static int calcOverdueFee(const Ticket &ticket);
+    static double calcOverdueFee(const Ticket &ticket);
 
-    static int calcLostBookPenalty(const string &isbn);
+    static double calcLostBookPenalty(const string &isbn);
 };
 
 #endif //LIBRARYPROJECT_STATISTIC_CONTROLLER_H

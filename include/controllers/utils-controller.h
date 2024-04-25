@@ -20,6 +20,10 @@ public:
     static void shouldContinue(void (*callback)());
 
     static string getCurrentDate();
+
+    static int calcDateDifference(const string &date1_str, const string &date2_str);
+
+    static string toLocaleString(const double &number);
 };
 
 #endif //LIBRARYPROJECT_UTILS_CONTROLLER_H
