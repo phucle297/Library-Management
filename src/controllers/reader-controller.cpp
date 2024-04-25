@@ -23,9 +23,21 @@ void ReaderController::handleUserChoice(int choice) {
         case 2: {
             string id, fullName, identityNumber, dateOfBirth, gender, email, address, issueDate, expiryDate;
             cout << "Creating new reader..." << endl;
+            bool flag = false;
+            while (!flag) {
+                cout << "Enter ID: ";
+                cin >> id;
+                bool isIdExists = false;
+                for (Reader &reader: readersData) {
+                    if (reader.id == id) {
+                        isIdExists = true;
+                        cout << "Reader id exists, please enter again." << endl;
+                        break;
+                    }
+                }
+                if (!isIdExists) flag = true;
+            };
 
-            cout << "Enter ID: ";
-            cin >> id;
             cout << "Enter full name: ";
             cin.ignore();
             getline(cin, fullName);
@@ -60,7 +72,8 @@ void ReaderController::handleUserChoice(int choice) {
             break;
         }
         case 3: {
-            string idToUpdate, updatedFullName, updatedIdentityCard, updatedDateOfBirth, updatedGender, updatedEmail, updatedAddress, updatedIssueDate, updatedExpiryDate;
+            string idToUpdate, updatedFullName, updatedIdentityCard, updatedDateOfBirth, updatedGender, updatedEmail,
+                    updatedAddress, updatedIssueDate, updatedExpiryDate;
             bool found = false;
 
             cout << "Enter the ID of the reader you want to update: ";
@@ -124,9 +137,11 @@ void ReaderController::handleUserChoice(int choice) {
                         updatedExpiryDate = reader.expiryDate;
                     }
 
-                    Reader updatedReader{idToUpdate, updatedFullName, updatedIdentityCard, updatedDateOfBirth,
-                                         updatedGender, updatedEmail, updatedAddress, updatedIssueDate,
-                                         updatedExpiryDate};
+                    Reader updatedReader{
+                        idToUpdate, updatedFullName, updatedIdentityCard, updatedDateOfBirth,
+                        updatedGender, updatedEmail, updatedAddress, updatedIssueDate,
+                        updatedExpiryDate
+                    };
 
                     updateReader(idToUpdate, updatedReader);
 
@@ -183,7 +198,7 @@ void ReaderController::handleUserChoice(int choice) {
             UtilsController::shouldContinue(viewMenuAndExecute);
             break;
         };
-        case 7 : {
+        case 7: {
             string searchValue;
             cout << "Enter search value: ";
             cin.ignore();
@@ -276,13 +291,11 @@ void ReaderController::deleteReader(const string &idToDelete) {
     if (!found) {
         cout << "Reader with ID " << idToDelete << " not found. Please try again." << endl;
     }
-
 }
 
 vector<Reader> ReaderController::getReadersWithSearch(const string &search) {
     vector<Reader> foundReaders;
     for (const auto &reader: readersData) {
-
         string idLowerCase = reader.id;
         transform(idLowerCase.begin(), idLowerCase.end(), idLowerCase.begin(), ::tolower);
 
@@ -305,5 +318,3 @@ vector<Reader> ReaderController::getReadersWithSearch(const string &search) {
     }
     return foundReaders;
 }
-
-
