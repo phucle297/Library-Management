@@ -27,9 +27,21 @@ void BookController::handleUserChoice(int choice) {
             double price;
             vector<string> genre;
             cout << "Creating new book..." << endl;
+            bool flag = false;
+            while (!flag) {
+                cout << "Enter ISBN: ";
+                cin >> isbn;
+                bool isIsbnExists = false;
+                for (Book &book: booksData) {
+                    if (book.isbn == isbn) {
+                        isIsbnExists = true;
+                        cout << "Isbn exists, please enter again." << endl;
+                        break;
+                    }
+                }
+                if (!isIsbnExists) flag = true;
+            };
 
-            cout << "Enter ISBN: ";
-            cin >> isbn;
             cout << "Enter title: ";
             cin.ignore();
             getline(cin, title);
