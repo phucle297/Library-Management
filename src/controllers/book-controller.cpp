@@ -86,10 +86,10 @@ void BookController::handleUserChoice(int choice) {
             while (!found) {
                 cout << "Enter the ISBN of the book you want to update: ";
                 cin >> isbnToUpdate;
-                cout << "Press Enter with empty string to keep existing data..." << endl;
 
                 for (auto &book: booksData) {
                     if (book.isbn == isbnToUpdate) {
+                        cout << "Press Enter with empty string to keep existing data..." << endl;
                         cout << "Enter updated title: ";
                         cin.ignore();
                         getline(cin, updatedTitle);
