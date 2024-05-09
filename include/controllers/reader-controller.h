@@ -7,8 +7,7 @@
 
 #include "../models/reader-model.h"
 
-class ReaderController {
-public:
+struct ReaderController {
     static void handleUserChoice(int choice);
 
     static void viewMenuAndExecute();

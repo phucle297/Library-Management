@@ -10,8 +10,7 @@
 
 using namespace std;
 
-class Book {
-public:
+struct Book {
     string isbn;
     string title;
     string author;
@@ -20,8 +19,6 @@ public:
     vector<string> genre;
     double price;
     int quantity;
-
-    // Constructor
     Book(
             const string &isbn,
             const string &title,

@@ -5,8 +5,7 @@
 #ifndef LIBRARYPROJECT_MENU_VIEW_H
 #define LIBRARYPROJECT_MENU_VIEW_H
 
-class MenuView {
-public:
+struct MenuView {
     static void displayMenu();
 };
 

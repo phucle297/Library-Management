@@ -5,8 +5,7 @@
 #ifndef LIBRARYPROJECT_STATISTIC_VIEW_H
 #define LIBRARYPROJECT_STATISTIC_VIEW_H
 
-class StatisticView {
-public:
+struct StatisticView {
     static void displayStatisticMenu();
 };
 

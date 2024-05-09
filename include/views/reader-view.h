@@ -10,8 +10,7 @@
 
 using namespace std;
 
-class ReaderView {
-public:
+struct ReaderView {
     static void displayReaderMenu();
 
     static void viewReadersTable(const vector<Reader> &reader);

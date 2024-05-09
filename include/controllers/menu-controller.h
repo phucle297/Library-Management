@@ -5,8 +5,7 @@
 #ifndef LIBRARYPROJECT_MENU_CONTROLLER_H
 #define LIBRARYPROJECT_MENU_CONTROLLER_H
 
-class MenuController {
-public:
+struct MenuController {
     static void handleUserChoice(int choice);
 
     static void viewMenuAndExecute();

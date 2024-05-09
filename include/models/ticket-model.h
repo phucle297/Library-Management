@@ -10,8 +10,7 @@
 
 using namespace std;
 
-class BookStatus {
-public:
+struct BookStatus {
     string isbn;
     bool lost;
 
@@ -19,8 +18,7 @@ public:
     }
 };
 
-class Ticket {
-public:
+struct Ticket {
     string id;
     string readerId;
     string borrowDate;

@@ -8,8 +8,7 @@
 #include "vector"
 #include "../models/ticket-model.h"
 
-class TicketController {
-public:
+struct TicketController {
     static void handleUserChoice(int choice);
 
     static void viewMenuAndExecute();

@@ -6,11 +6,12 @@
 #define LIBRARYPROJECT_UTILS_CONTROLLER_H
 
 #include "string"
+#include "iostream"
+#include "fstream"
 
 using namespace std;
 
-class UtilsController {
-public:
+struct UtilsController {
     static int getUserChoice();
 
     static void clearScreen();
@@ -24,6 +25,8 @@ public:
     static int calcDateDifference(const string &date1_str, const string &date2_str);
 
     static string toLocaleString(const double &number);
+
+    static void readMockDataFromFile(const string &filename, void (*callback)(const string &line));
 };
 
 #endif //LIBRARYPROJECT_UTILS_CONTROLLER_H

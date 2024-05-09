@@ -9,8 +9,7 @@
 
 using namespace std;
 
-class BookController {
-public:
+struct BookController {
     static void handleUserChoice(int choice);
 
     static void viewMenuAndExecute();

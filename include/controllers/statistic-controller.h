@@ -12,8 +12,7 @@
 
 using namespace std;
 
-class StatisticController {
-public:
+struct StatisticController {
     static void handleUserChoice(int choice);
 
     static void viewMenuAndExecute();

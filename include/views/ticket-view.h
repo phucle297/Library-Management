@@ -8,8 +8,7 @@
 #include "vector"
 #include "../models/ticket-model.h"
 
-class TicketView {
-public:
+struct TicketView {
     static void displayTicketMenu();
 
     static void viewTicketsTable(vector<Ticket> &tickets);

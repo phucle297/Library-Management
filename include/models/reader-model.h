@@ -10,8 +10,7 @@
 
 using namespace std;
 
-class Reader {
-public:
+struct Reader {
     string id;
     string fullName;
     string identityNumber;
@@ -24,15 +23,15 @@ public:
 
     // Constructor
     Reader(
-        const string &id,
-        const string &fullName,
-        const string &identityNumber,
-        const string &dateOfBirth,
-        const string &gender,
-        const string &email,
-        const string &address,
-        const string &issueDate,
-        const string &expiryDate
+            const string &id,
+            const string &fullName,
+            const string &identityNumber,
+            const string &dateOfBirth,
+            const string &gender,
+            const string &email,
+            const string &address,
+            const string &issueDate,
+            const string &expiryDate
     ) : id(id),
         fullName(fullName),
         identityNumber(identityNumber),

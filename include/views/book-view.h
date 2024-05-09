@@ -10,8 +10,7 @@
 
 using namespace std;
 
-class BookView {
-public:
+struct BookView {
     static void displayBookMenu();
 
     static void viewBooksTable(const vector<Book> &books);
