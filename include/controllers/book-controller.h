@@ -27,6 +27,8 @@ struct BookController {
     static void deleteBook(const string &isbn);
 
     static vector<Book> getBooksWithSearch(const string &search);
+
+    static void parseBooks(FILE *fp);
 };
 
 #endif //LIBRARYPROJECT_BOOK_CONTROLLER_H

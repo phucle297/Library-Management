@@ -11,6 +11,8 @@
 
 using namespace std;
 
+typedef void (*CallbackFunction)(FILE *fp);
+
 struct UtilsController {
     static int getUserChoice();
 
@@ -26,7 +28,7 @@ struct UtilsController {
 
     static string toLocaleString(const double &number);
 
-    static void readMockDataFromFile(const string &filename, void (*callback)(const string &line));
+    static void getDataFromFile(const string &path, CallbackFunction callback);
 };
 
 #endif //LIBRARYPROJECT_UTILS_CONTROLLER_H

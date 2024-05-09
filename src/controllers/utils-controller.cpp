@@ -100,3 +100,15 @@ string UtilsController::toLocaleString(const double &number) {
     }
     return str;
 }
+
+void UtilsController::getDataFromFile(const string &path, CallbackFunction callback) {
+    FILE *fp;
+    fopen_s(&fp, path.c_str(), "rt");
+    if (fp != NULL) {
+        callback(fp);
+        fclose(fp);
+    } else {
+        cerr << "Can not open file " << path << endl;
+        return;
+    }
+}

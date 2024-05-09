@@ -19,6 +19,7 @@ struct Book {
     vector<string> genre;
     double price;
     int quantity;
+
     Book(
             const string &isbn,
             const string &title,
@@ -41,6 +42,6 @@ struct Book {
 };
 
 extern vector<Book> booksData; // Declaration of bookData
-vector<Book> getBooksMockData(); // Declaration of getMockData function
+void getBooksMockData(); // Declaration of getMockData function
 
 #endif // LIBRARYPROJECT_BOOK_MODEL_H

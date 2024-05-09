@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iostream>
 #include <sstream>
+#include <string.h>
 #include "../../include/controllers/book-controller.h"
 #include "../../include/controllers/utils-controller.h"
 #include "../../include/controllers/menu-controller.h"
@@ -190,13 +191,13 @@ void BookController::handleUserChoice(int choice) {
 
         case 6: {
             string name;
-            cout << "Search by Name:";
+            cout << "Search by Name: ";
             cin >> name;
             transform(name.begin(), name.end(), name.begin(), [](unsigned char c) { return tolower(c); });
             vector<Book> books = getBookByName(name);
 
             if (!books.empty()) {
-                cout << "Books find by name" << endl;
+                cout << "Books find by name " << endl;
                 BookView::viewBooksTable(books);
             } else {
                 cout << "Not found!" << endl;
@@ -213,7 +214,7 @@ void BookController::handleUserChoice(int choice) {
 
             vector<Book> books = getBooksWithSearch(search);
             if (!books.empty()) {
-                cout << "Books find by name" << endl;
+                cout << "Books find by name " << endl;
                 BookView::viewBooksTable(books);
             } else {
                 cout << "Not found!" << endl;
@@ -331,4 +332,32 @@ void BookController::deleteBook(const string &isbnToDelete) {
     if (!found) {
         cout << "Book with ISBN " << isbnToDelete << " not found. Please try again." << endl;
     }
+}
+
+void BookController::parseBooks(FILE *fp) {
+    vector<Book> booksDataFromFile;
+    char isbn[100], title[100], author[100], publisher[100], genreStr[100], publicationYearStr[100], priceStr[100], quantityStr[100];
+    while (fscanf_s(fp, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", isbn, sizeof(isbn), title, sizeof(title),
+                    author, sizeof(author), publisher, sizeof(publisher), publicationYearStr,
+                    sizeof(publicationYearStr), genreStr, sizeof(genreStr),
+                    priceStr, sizeof(priceStr),
+                    quantityStr, sizeof(quantityStr)) != EOF) {
+        // Convert string values to appropriate types
+        int publicationYear = atoi(publicationYearStr);
+        double price = atof(priceStr);
+        int quantity = atoi(quantityStr);
+
+        // Split genreStr by '|' and store genres in a vector
+        vector<string> genres;
+        char *token = strtok(genreStr, "|");
+        while (token != nullptr) {
+            genres.push_back(token);
+            token = strtok(nullptr, "|");
+        }
+
+        // Create a Book object and add it to the vector
+        booksDataFromFile.emplace_back(isbn, title, author, publisher, publicationYear, genres, price, quantity);
+    }
+
+    booksData = booksDataFromFile;
 }

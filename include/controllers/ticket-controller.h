@@ -26,6 +26,8 @@ struct TicketController {
     static void createBorrowTicket(Ticket &ticketToCreate);
 
     static Ticket returnBooks(string &ticketId, string &returnDateActual, vector<string> &lostBooks);
+
+    static void parseTickets(FILE *file);
 };
 
 #endif //LIBRARYPROJECT_TICKET_CONTROLLER_H
