@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include <set>
 #include "algorithm"
 #include "../../include/controllers/ticket-controller.h"
@@ -158,45 +159,57 @@ void TicketController::handleUserChoice(int choice) {
                     flag = true;
                     cout << "Current data of ticket  " << id << endl;
                     TicketView::viewTicketsTable(ticket);
+
+                    cout << "Enter updated reader id: ";
+                    cin.ignore();
+                    getline(cin, readerId);
+
+                    if (readerId.empty()) {
+                        readerId = ticket.readerId;
+                    }
+
+                    cout << "Enter updated borrow date: ";
+                    getline(cin, borrowDate);
+                    if (borrowDate.empty()) {
+                        borrowDate = ticket.borrowDate;
+                    }
+
+                    cout << "Enter updated return date expected: ";
+                    getline(cin, returnDateExpected);
+                    if (returnDateExpected.empty()) {
+                        returnDateExpected = ticket.returnDateExpected;
+                    }
+
+                    cout << "Enter updated return date actual: ";
+                    getline(cin, returnDateActual);
+                    if (returnDateActual.empty()) {
+                        returnDateActual = ticket.returnDateActual;
+                    }
+
+                    cout << "Enter updated number of borrow book: ";
+                    cin >> numberOfBorrowBooks;
+                    listBooks.reserve(numberOfBorrowBooks);
+                    for (int i = 0; i < numberOfBorrowBooks; i++) {
+                        string isbn;
+                        bool lost;
+                        cout << "Book " << i + 1 << ":" << endl;
+                        cout << "ISBN: ";
+                        cin >> isbn;
+                        cout << "Is lost (1: Yes, 0: No): ";
+                        cin >> lost;
+                        listBooks.emplace_back(isbn, lost);
+                    };
+                    Ticket updatedTicket(id, readerId, borrowDate, returnDateExpected, returnDateActual, listBooks);
+                    updateTicketById(id, updatedTicket);
+
+                    cout << "Ticket " << id << " updated!" << endl;
                 }
             }
 
             if (!flag) {
                 cout << "Ticket with ID " << id << " not found. Please try again." << endl;
-                UtilsController::shouldContinue(viewMenuAndExecute);
-            } else {
-                cout << "Enter updated reader id: ";
-                cin.ignore();
-                getline(cin, readerId);
-
-                cout << "Enter updated borrow date: ";
-                getline(cin, borrowDate);
-
-                cout << "Enter updated return date expected: ";
-                getline(cin, returnDateExpected);
-
-                cout << "Enter updated return date actual: ";
-                getline(cin, returnDateActual);
-
-                cout << "Enter updated number of borrow book: ";
-                cin >> numberOfBorrowBooks;
-                listBooks.reserve(numberOfBorrowBooks);
-                for (int i = 0; i < numberOfBorrowBooks; i++) {
-                    string isbn;
-                    bool lost;
-                    cout << "Book " << i + 1 << ":" << endl;
-                    cout << "ISBN: ";
-                    cin >> isbn;
-                    cout << "Is lost (1: Yes, 0: No): ";
-                    cin >> lost;
-                    listBooks.emplace_back(isbn, lost);
-                };
-                Ticket updatedTicket(id, readerId, borrowDate, returnDateExpected, returnDateActual, listBooks);
-                updateTicketById(id, updatedTicket);
-
-                cout << "Ticket " << id << " updated!" << endl;
-                UtilsController::shouldContinue(viewMenuAndExecute);
             }
+            UtilsController::shouldContinue(viewMenuAndExecute);
 
             break;
         }
@@ -274,10 +287,13 @@ void TicketController::deleteTicket(string &ticketId) {
     if (!found) {
         cout << "Book with ISBN " << ticketId << " not found. Please try again." << endl;
     }
+
+    UtilsController::writeDataToFile(TICKETS_DATA_PATH, writeTicketsToFile);
 }
 
 void TicketController::createBorrowTicket(Ticket &ticketToCreate) {
     ticketsData.push_back(ticketToCreate);
+    UtilsController::writeDataToFile(TICKETS_DATA_PATH, writeTicketsToFile);
 };
 
 Ticket TicketController::returnBooks(string &ticketId, string &returnDateActual,
@@ -293,11 +309,11 @@ Ticket TicketController::returnBooks(string &ticketId, string &returnDateActual,
                     bookStatus.lost = false;
                 }
             }
-
+            UtilsController::writeDataToFile(TICKETS_DATA_PATH, writeTicketsToFile);
             return ticket;
         }
     }
-
+    UtilsController::writeDataToFile(TICKETS_DATA_PATH, writeTicketsToFile);
     return Ticket("", "", "", "", "", {});
 }
 
@@ -305,9 +321,58 @@ Ticket TicketController::updateTicketById(string &ticketId, Ticket &updatedTicke
     for (auto &ticket: ticketsData) {
         if (ticket.id == ticketId) {
             ticket = updatedTicket;
+            UtilsController::writeDataToFile(TICKETS_DATA_PATH, writeTicketsToFile);
             return ticket;
         }
     }
-
+    UtilsController::writeDataToFile(TICKETS_DATA_PATH, writeTicketsToFile);
     return Ticket("", "", "", "", "", {});
+}
+
+void TicketController::parseTickets(FILE *fp) {
+    vector<Ticket> ticketsDataFromFile;
+
+    char id[100], readerId[100], borrowDate[30], returnDateExpected[30], returnDateActual[30], isbn[20], lost[5];
+
+    while (fscanf(fp, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", id, readerId, borrowDate, returnDateExpected,
+                  returnDateActual, isbn, lost) != EOF) {
+        bool isBookLost = strcmp(lost, "true") == 0;
+        vector<BookStatus> bookStatuses;
+        bookStatuses.emplace_back(isbn, isBookLost);
+
+        bool isBookExists = false;
+        for (auto &ticket: ticketsDataFromFile) {
+            if (ticket.id == id) {
+                ticket.listBookStatus.emplace_back(isbn, isBookLost);
+                isBookExists = true;
+                break;
+            }
+        }
+
+// char to string
+
+        stringstream ss;
+        ss << returnDateActual;
+        string returnDateActualString;
+        ss >> returnDateActualString;
+
+        if (!isBookExists) {
+            ticketsDataFromFile.emplace_back(id, readerId, borrowDate, returnDateExpected,
+                                             returnDateActualString, bookStatuses);
+        }
+    }
+
+    ticketsData = ticketsDataFromFile;
+}
+
+void TicketController::writeTicketsToFile(FILE *fp) {
+    for (const auto &ticket: ticketsData) {
+        const char *returnDateActual = ticket.returnDateActual.empty() ? " " : ticket.returnDateActual.c_str();
+        for (const auto &bookStatus: ticket.listBookStatus) {
+            fprintf(fp, "%s,%s,%s,%s,%s,%s,%s\n", ticket.id.c_str(), ticket.readerId.c_str(),
+                    ticket.borrowDate.c_str(),
+                    ticket.returnDateExpected.c_str(), returnDateActual, bookStatus.isbn.c_str(),
+                    bookStatus.lost ? "true" : "false");
+        }
+    }
 }

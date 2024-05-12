@@ -42,6 +42,7 @@ struct Book {
 };
 
 extern vector<Book> booksData; // Declaration of bookData
+const string BOOKS_DATA_PATH = "../books.txt";
 void getBooksMockData(); // Declaration of getMockData function
 
 #endif // LIBRARYPROJECT_BOOK_MODEL_H

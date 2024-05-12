@@ -8,8 +8,7 @@
 using namespace std;
 
 void getBooksMockData() {
-    string path = "../books.txt";
-    UtilsController::getDataFromFile(path, BookController::parseBooks);
+    UtilsController::getDataFromFile(BOOKS_DATA_PATH, BookController::parseBooks);
 }
 
-vector<Book> booksData;
+vector<Book> booksData = {}; // Initialize booksData with empty vector

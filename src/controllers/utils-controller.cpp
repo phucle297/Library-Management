@@ -1,4 +1,5 @@
 #include "iostream"
+#include "fstream"
 #include "chrono"
 #include "cstdio"
 #include "string"
@@ -102,8 +103,7 @@ string UtilsController::toLocaleString(const double &number) {
 }
 
 void UtilsController::getDataFromFile(const string &path, CallbackFunction callback) {
-    FILE *fp;
-    fopen_s(&fp, path.c_str(), "rt");
+    FILE *fp = fopen(path.c_str(), "rt");
     if (fp != NULL) {
         callback(fp);
         fclose(fp);
@@ -111,4 +111,21 @@ void UtilsController::getDataFromFile(const string &path, CallbackFunction callb
         cerr << "Can not open file " << path << endl;
         return;
     }
+}
+
+void UtilsController::writeDataToFile(const string &path, CallbackFunction callback) {
+    FILE *fp = fopen(path.c_str(), "wt");
+    if (fp != NULL) {
+        callback(fp);
+        fclose(fp);
+    } else {
+        cerr << "Can not open file " << path << endl;
+        return;
+    }
+}
+
+inline string UtilsController::trim(string &str) {
+    str.erase(str.find_last_not_of(' ') + 1);         //suffixing spaces
+    str.erase(0, str.find_first_not_of(' '));       //prefixing spaces
+    return str;
 }

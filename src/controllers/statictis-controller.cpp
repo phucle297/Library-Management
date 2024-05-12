@@ -17,8 +17,6 @@
 using namespace std;
 
 void StatisticController::handleUserChoice(int choice) {
-    MenuController menuController{};
-
     switch (choice) {
         case 1: {
             listAllBooks();
@@ -248,7 +246,7 @@ vector<Reader> StatisticController::listOverdueReaders() {
     return overdueReaders;
 }
 
-double StatisticController::calcLostBookPenalty(const std::string &isbn) {
+double StatisticController::calcLostBookPenalty(const string &isbn) {
     for (const Book &book: booksData) {
         if (book.isbn == isbn) return book.price * 200;
     }

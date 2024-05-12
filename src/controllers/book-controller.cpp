@@ -250,6 +250,7 @@ vector<Book> BookController::getAllBooks() {
 
 void BookController::postBook(const Book &newBook) {
     booksData.push_back(newBook);
+    UtilsController::writeDataToFile(BOOKS_DATA_PATH, writeBooksToFile);
 }
 
 void BookController::updateBook(const string &isbn, const Book &updatedBook) {
@@ -259,8 +260,8 @@ void BookController::updateBook(const string &isbn, const Book &updatedBook) {
             break;
         }
     }
+    UtilsController::writeDataToFile(BOOKS_DATA_PATH, writeBooksToFile);
 }
-
 
 vector<Book> BookController::getBookByISBN(const string &isbn) {
     vector<Book> foundBooks;
@@ -332,16 +333,14 @@ void BookController::deleteBook(const string &isbnToDelete) {
     if (!found) {
         cout << "Book with ISBN " << isbnToDelete << " not found. Please try again." << endl;
     }
+    UtilsController::writeDataToFile(BOOKS_DATA_PATH, writeBooksToFile);
 }
 
 void BookController::parseBooks(FILE *fp) {
     vector<Book> booksDataFromFile;
     char isbn[100], title[100], author[100], publisher[100], genreStr[100], publicationYearStr[100], priceStr[100], quantityStr[100];
-    while (fscanf_s(fp, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", isbn, sizeof(isbn), title, sizeof(title),
-                    author, sizeof(author), publisher, sizeof(publisher), publicationYearStr,
-                    sizeof(publicationYearStr), genreStr, sizeof(genreStr),
-                    priceStr, sizeof(priceStr),
-                    quantityStr, sizeof(quantityStr)) != EOF) {
+    while (fscanf(fp, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", isbn, title,
+                  author, publisher, publicationYearStr, genreStr, priceStr, quantityStr) != EOF) {
         // Convert string values to appropriate types
         int publicationYear = atoi(publicationYearStr);
         double price = atof(priceStr);
@@ -360,4 +359,20 @@ void BookController::parseBooks(FILE *fp) {
     }
 
     booksData = booksDataFromFile;
+}
+
+void BookController::writeBooksToFile(FILE *fp) {
+    for (const auto &book: booksData) {
+        fprintf(fp, "%s,%s,%s,%s,%d,", book.isbn.c_str(), book.title.c_str(), book.author.c_str(),
+                book.publisher.c_str(), book.publicationYear);
+
+        for (int i = 0; i < book.genre.size(); i++) {
+            fprintf(fp, "%s", book.genre[i].c_str());
+            if (i != book.genre.size() - 1) {
+                fprintf(fp, "|");
+            }
+        }
+
+        fprintf(fp, ",%.2f,%d\n", book.price, book.quantity);
+    }
 }

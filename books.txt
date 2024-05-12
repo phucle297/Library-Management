@@ -1,8 +1,8 @@
-9780451524935,1984,George Orwell,Signet Classic,1949,Dystopian|Political fiction,239250,100
-9780061120084,To Kill a Mockingbird,Harper Lee,Harper Perennial Modern Classics,1960,Novel|Southern Gothic,215850,75
-9780141187761,The Catcher in the Rye,J.D. Salinger,Penguin Books,1951,Coming-of-age fiction,252000,60
-9780141439556,Pride and Prejudice,Jane Austen,Penguin Classics,1813,Romance|Comedy of manners,173125,85
-9780141182551,The Great Gatsby,F. Scott Fitzgerald,Penguin Books,1925,Tragedy|Modernist novel,285875,70
-9781400079983,The Lord of the Rings,J.R.R. Tolkien,Mariner Books,1954,Fantasy,503550,55
-9780060935467,The Road,Cormac McCarthy,Vintage Books,2006,Post-apocalyptic fiction,311325,90
-9780345339683,The Hobbit,J.R.R. Tolkien,Del Rey Books,1937,Fantasy,362500,80
+9780451524935,1984,George Orwell,Signet Classic,1949,Dystopian|Political fiction,239250.00,100
+9780061120084,To Kill a Mockingbird,Harper Lee,Harper Perennial Modern Classics,1960,Novel|Southern Gothic,215850.00,75
+9780141187761,The Catcher in the Rye,J.D. Salinger,Penguin Books,1951,Coming-of-age fiction,252000.00,60
+9780141439556,Pride and Prejudice,Jane Austen,Penguin Classics,1813,Romance|Comedy of manners,173125.00,85
+9780141182551,The Great Gatsby,F. Scott Fitzgerald,Penguin Books,1925,Tragedy|Modernist novel,285875.00,70
+9781400079983,The Lord of the Rings,J.R.R. Tolkien,Mariner Books,1954,Fantasy,503550.00,55
+9780060935467,The Road,Cormac McCarthy,Vintage Books,2006,Post-apocalyptic fiction,311325.00,90
+9780345339683,The Hobbit,J.R.R. Tolkien,Del Rey Books,1937,Fantasy,362500.00,80

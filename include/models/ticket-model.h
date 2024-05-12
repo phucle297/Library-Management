@@ -43,7 +43,7 @@ struct Ticket {
 };
 
 extern vector<Ticket> ticketsData;
-
-vector<Ticket> getTicketsMockData();
+const string TICKETS_DATA_PATH = "../tickets.txt";
+void getTicketsMockData();
 
 #endif // LIBRARYPROJECT_TICKET_MODEL_H

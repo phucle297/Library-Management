@@ -138,9 +138,9 @@ void ReaderController::handleUserChoice(int choice) {
                     }
 
                     Reader updatedReader{
-                        idToUpdate, updatedFullName, updatedIdentityCard, updatedDateOfBirth,
-                        updatedGender, updatedEmail, updatedAddress, updatedIssueDate,
-                        updatedExpiryDate
+                            idToUpdate, updatedFullName, updatedIdentityCard, updatedDateOfBirth,
+                            updatedGender, updatedEmail, updatedAddress, updatedIssueDate,
+                            updatedExpiryDate
                     };
 
                     updateReader(idToUpdate, updatedReader);
@@ -265,6 +265,7 @@ vector<Reader> ReaderController::getReaderByName(const string &name) {
 
 void ReaderController::postReader(const Reader &newReader) {
     readersData.push_back(newReader);
+    UtilsController::writeDataToFile(READERS_DATA_PATH, writeReadersToFile);
 }
 
 void ReaderController::updateReader(const string &id, const Reader &updatedReader) {
@@ -274,6 +275,7 @@ void ReaderController::updateReader(const string &id, const Reader &updatedReade
             break;
         }
     }
+    UtilsController::writeDataToFile(READERS_DATA_PATH, writeReadersToFile);
 }
 
 void ReaderController::deleteReader(const string &idToDelete) {
@@ -291,6 +293,7 @@ void ReaderController::deleteReader(const string &idToDelete) {
     if (!found) {
         cout << "Reader with ID " << idToDelete << " not found. Please try again." << endl;
     }
+    UtilsController::writeDataToFile(READERS_DATA_PATH, writeReadersToFile);
 }
 
 vector<Reader> ReaderController::getReadersWithSearch(const string &search) {
@@ -317,4 +320,25 @@ vector<Reader> ReaderController::getReadersWithSearch(const string &search) {
         }
     }
     return foundReaders;
+}
+
+void ReaderController::parseReaders(FILE *fp) {
+    vector<Reader> readersDataFromFile;
+    char id[100], fullName[250], identityNumber[100], dateOfBirth[30], gender[10], email[100], address[250], issueDate[30], expiryDate[30];
+
+    while (fscanf(fp, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n", id, fullName, identityNumber,
+                  dateOfBirth, gender, email, address, issueDate, expiryDate) != EOF) {
+        readersDataFromFile.emplace_back(id, fullName, identityNumber, dateOfBirth, gender, email, address, issueDate,
+                                         expiryDate);
+    }
+
+    readersData = readersDataFromFile;
+}
+
+void ReaderController::writeReadersToFile(FILE *fp) {
+    for (const auto &reader: readersData) {
+        fprintf(fp, "%s,%s,%s,%s,%s,%s,%s,%s,%s\n", reader.id.c_str(), reader.fullName.c_str(),
+                reader.identityNumber.c_str(), reader.dateOfBirth.c_str(), reader.gender.c_str(), reader.email.c_str(),
+                reader.address.c_str(), reader.issueDate.c_str(), reader.expiryDate.c_str());
+    }
 }

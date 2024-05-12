@@ -29,6 +29,8 @@ struct BookController {
     static vector<Book> getBooksWithSearch(const string &search);
 
     static void parseBooks(FILE *fp);
+
+    static void writeBooksToFile(FILE *fp);
 };
 
 #endif //LIBRARYPROJECT_BOOK_CONTROLLER_H

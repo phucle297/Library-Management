@@ -29,6 +29,10 @@ struct UtilsController {
     static string toLocaleString(const double &number);
 
     static void getDataFromFile(const string &path, CallbackFunction callback);
+
+    static void writeDataToFile(const string &path, CallbackFunction callback);
+
+    static inline string trim(string &str);
 };
 
 #endif //LIBRARYPROJECT_UTILS_CONTROLLER_H

@@ -45,7 +45,8 @@ struct Reader {
 };
 
 extern vector<Reader> readersData;
+const string READERS_DATA_PATH = "../readers.txt";
 
-vector<Reader> getReadersMockData();
+void getReadersMockData();
 
 #endif // LIBRARYPROJECT_READER_MODEL_H

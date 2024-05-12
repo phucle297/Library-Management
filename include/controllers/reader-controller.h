@@ -26,7 +26,9 @@ struct ReaderController {
 
     static vector<Reader> getReadersWithSearch(const string &search);
 
-    static void parseReaders(FILE *file);
+    static void parseReaders(FILE *fp);
+
+    static void writeReadersToFile(FILE *fp);
 };
 
 #endif //LIBRARYPROJECT_READER_CONTROLLER_H
