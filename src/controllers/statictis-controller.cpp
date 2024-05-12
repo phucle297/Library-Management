@@ -246,13 +246,6 @@ vector<Reader> StatisticController::listOverdueReaders() {
     return overdueReaders;
 }
 
-double StatisticController::calcLostBookPenalty(const string &isbn) {
-    for (const Book &book: booksData) {
-        if (book.isbn == isbn) return book.price * 200;
-    }
-    return 0;
-}
-
 double StatisticController::calcOverdueFee(const Ticket &ticket) {
     string currentDate = UtilsController::getCurrentDate();
     bool isOverdueNotReturn = ticket.returnDateActual.empty() && currentDate > ticket.returnDateExpected;

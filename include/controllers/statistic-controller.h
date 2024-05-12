@@ -34,8 +34,6 @@ struct StatisticController {
     static double calcFeeAmount(const Ticket &ticket);
 
     static double calcOverdueFee(const Ticket &ticket);
-
-    static double calcLostBookPenalty(const string &isbn);
 };
 
 #endif //LIBRARYPROJECT_STATISTIC_CONTROLLER_H
