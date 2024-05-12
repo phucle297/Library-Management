@@ -11,6 +11,7 @@
 #include "../../include/controllers/utils-controller.h"
 #include "../../include/views/ticket-view.h"
 #include "../../include/views/book-view.h"
+#include "../../include/controllers/book-controller.h"
 
 using namespace std;
 
@@ -287,13 +288,14 @@ void TicketController::deleteTicket(string &ticketId) {
     if (!found) {
         cout << "Book with ISBN " << ticketId << " not found. Please try again." << endl;
     }
-
+    UtilsController::writeDataToFile(BOOKS_DATA_PATH, BookController::writeBooksToFile);
     UtilsController::writeDataToFile(TICKETS_DATA_PATH, writeTicketsToFile);
 }
 
 void TicketController::createBorrowTicket(Ticket &ticketToCreate) {
     ticketsData.push_back(ticketToCreate);
     UtilsController::writeDataToFile(TICKETS_DATA_PATH, writeTicketsToFile);
+    UtilsController::writeDataToFile(BOOKS_DATA_PATH, BookController::writeBooksToFile);
 };
 
 Ticket TicketController::returnBooks(string &ticketId, string &returnDateActual,
@@ -310,10 +312,12 @@ Ticket TicketController::returnBooks(string &ticketId, string &returnDateActual,
                 }
             }
             UtilsController::writeDataToFile(TICKETS_DATA_PATH, writeTicketsToFile);
+            UtilsController::writeDataToFile(BOOKS_DATA_PATH, BookController::writeBooksToFile);
             return ticket;
         }
     }
     UtilsController::writeDataToFile(TICKETS_DATA_PATH, writeTicketsToFile);
+    UtilsController::writeDataToFile(BOOKS_DATA_PATH, BookController::writeBooksToFile);
     return Ticket("", "", "", "", "", {});
 }
 
