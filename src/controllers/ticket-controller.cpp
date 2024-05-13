@@ -31,10 +31,10 @@ void TicketController::handleUserChoice(int choice) {
             cin.ignore();
             getline(cin, readerId);
 
-            cout << "Enter borrow date: ";
+            cout << "Enter borrow date (YYYY-MM-DD): ";
             getline(cin, borrowDate);
 
-            cout << "Enter return date expected: ";
+            cout << "Enter return date expected (YYYY-MM-DD): ";
             getline(cin, returnDateExpected);
 
             cout << "Enter number of borrow book: ";
@@ -59,6 +59,7 @@ void TicketController::handleUserChoice(int choice) {
                 }
             }
 
+            UtilsController::writeDataToFile(BOOKS_DATA_PATH, BookController::writeBooksToFile);
             cout << "Borrow ticket created!" << endl;
             UtilsController::shouldContinue(viewMenuAndExecute);
 
@@ -102,6 +103,7 @@ void TicketController::handleUserChoice(int choice) {
             }
 
             Ticket returnedTicket = returnBooks(ticketId, returnDateActual, lostBooks);
+            UtilsController::writeDataToFile(BOOKS_DATA_PATH, BookController::writeBooksToFile);
 
             if (!returnedTicket.id.empty()) {
                 cout << "Books returned successfully!" << endl;
@@ -170,19 +172,19 @@ void TicketController::handleUserChoice(int choice) {
                         readerId = ticket.readerId;
                     }
 
-                    cout << "Enter updated borrow date: ";
+                    cout << "Enter updated borrow date (YYYY-MM-DD): ";
                     getline(cin, borrowDate);
                     if (borrowDate.empty()) {
                         borrowDate = ticket.borrowDate;
                     }
 
-                    cout << "Enter updated return date expected: ";
+                    cout << "Enter updated return date expected (YYYY-MM-DD): ";
                     getline(cin, returnDateExpected);
                     if (returnDateExpected.empty()) {
                         returnDateExpected = ticket.returnDateExpected;
                     }
 
-                    cout << "Enter updated return date actual: ";
+                    cout << "Enter updated return date actual (YYYY-MM-DD): ";
                     getline(cin, returnDateActual);
                     if (returnDateActual.empty()) {
                         returnDateActual = ticket.returnDateActual;
