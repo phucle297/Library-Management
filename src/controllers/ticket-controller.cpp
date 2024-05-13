@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <cstring>
 #include <set>
 #include "algorithm"
 #include "../../include/controllers/ticket-controller.h"
